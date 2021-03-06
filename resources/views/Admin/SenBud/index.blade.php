@@ -20,16 +20,21 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($senbud as $upd)    
+            @foreach($senbud as $senbud)    
                 <tr>
                 <th scope="row">{{ ++ $i }}</th>
-                    <td>{{ $upd -> name}}</td>
-                    <td>{{ $upd -> tempat}}</td>                
-                    <td>{{ $upd -> hari}}</td>
-                    <td>{{ $upd -> jam}}</td>
+                    <td>{{ $senbud -> name}}</td>
+                    <td>{{ $senbud -> tempat}}</td>                
+                    <td>{{ $senbud -> hari}}</td>
+                    <td>{{ $senbud -> jam}}</td>
                     <td>
-                    <form action="{{route('senbud.destroy', $upd->id)}}" method="post">
-                        <a href="{{route('senbud.edit',$upd->id)}}" type="button" class="btn btn-primary">Update</a>
+                        <img src="{{asset('images/senbud/'.$senbud->image_1)}}" alt="" class="img-fluid" style="width: 50px; height:40px">
+                        <img src="{{asset('images/senbud/'.$senbud->image_2)}}" alt="" class="img-fluid" style="width: 50px; height:40px">
+                        <img src="{{asset('images/senbud/'.$senbud->image_3)}}" alt="" class="img-fluid" style="width: 50px; height:40px">
+                    </td>
+                    <td>
+                    <form action="{{route('senbud.destroy', $senbud->id)}}" method="post">
+                        <a href="{{route('senbud.edit',$senbud->id)}}" type="button" class="btn btn-primary">Update</a>
                         
                         @csrf
                         @method('DELETE')               

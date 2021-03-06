@@ -7,6 +7,10 @@ use App\Http\Controllers\Admin\RayonController as AdminRayon;
 use App\Http\Controllers\Admin\SiswaController as AdminSiswa;
 use App\Http\Controllers\Admin\UpdController as AdminUpd;
 use App\Http\Controllers\Admin\SenbudController as AdminSenbud;
+use App\Http\Controllers\Admin\InstructureController as AdminInstruktur;
+use App\Http\Controllers\Admin\GurusenbudController as AdminGS;
+use App\Http\Controllers\Admin\KoordinatorController as AdminKoordinator;
+use App\Http\Controllers\Admin\UpdprodController as AdminUpdprod;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +33,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('siswa', AdminSiswa::class);
     Route::resource('upd', AdminUpd::class);
     Route::resource('senbud', AdminSenbud::class);
+    Route::resource('updprod', AdminUpdprod::class);
+    Route::resource('instruktur', AdminInstruktur::class);
+    Route::resource('gurusenbud', AdminGS::class);
+    Route::resource('koordinator', AdminKoordinator::class);
 });
+
+
 
 
 

@@ -43,7 +43,23 @@ class SenbudController extends Controller
             'type' => "Senbud",
             'hari' => $dataRequest['hari'],
             'jam' => $dataRequest['jam'],    
+            'description' => $dataRequest['description'],  
         ];
+        if(!empty($dataRequest['image_1'])){
+            $imageName = date('ymdhis').'_image_1.'.$request->image_1->extension();
+            $request->image_1->move(public_path('images/senbud'), $imageName);
+            $data['image_1'] = $imageName;
+        }
+        if(!empty($dataRequest['image_2'])){
+            $imageName = date('ymdhis').'_image_2.'.$request->image_2->extension();  
+            $request->image_2->move(public_path('images/senbud'), $imageName);
+            $data['image_2'] = $imageName;
+        }
+        if(!empty($dataRequest['image_3'])){
+            $imageName = date('ymdhis').'_image_3.'.$request->image_3->extension();  
+            $request->image_3->move(public_path('images/senbud'), $imageName);
+            $data['image_3'] = $imageName;
+        }
         Ekskul::create($data);
         
         return redirect()->route('senbud.index')
@@ -68,9 +84,24 @@ class SenbudController extends Controller
             'tempat' => $dataRequest['tempat'],
             'type' => "Senbud",
             'hari' => $dataRequest['hari'],
-            'jam' => $dataRequest['jam'],    
-        
+            'jam' => $dataRequest['jam'],  
+            'description' => $dataRequest['description'],                        
         ];
+        if(!empty($dataRequest['image_1'])){
+            $imageName = date('ymdhis').'_image_1.'.$request->image_1->extension();
+            $request->image_1->move(public_path('images/senbud'), $imageName);
+            $data['image_1'] = $imageName;
+        }
+        if(!empty($dataRequest['image_2'])){
+            $imageName = date('ymdhis').'_image_2.'.$request->image_2->extension();  
+            $request->image_2->move(public_path('images/senbud'), $imageName);
+            $data['image_2'] = $imageName;
+        }
+        if(!empty($dataRequest['image_3'])){
+            $imageName = date('ymdhis').'_image_3.'.$request->image_3->extension();  
+            $request->image_3->move(public_path('images/senbud'), $imageName);
+            $data['image_3'] = $imageName;
+        }
         Ekskul::find($id)->update($data);
         return redirect()->route('senbud.index')
             ->with('success','Success Update Data');

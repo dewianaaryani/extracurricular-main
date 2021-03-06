@@ -16,6 +16,7 @@
             <th scope="col">tempat</th>
             <th scope="col">hari</th>
             <th scope="col">jam</th>
+            <th scope="col">image</th>
             <th scope="col">action</th>
             </tr>
         </thead>
@@ -27,6 +28,12 @@
                     <td>{{ $upd -> tempat}}</td>                
                     <td>{{ $upd -> hari}}</td>
                     <td>{{ $upd -> jam}}</td>
+                    <td>
+                        <img src="{{asset('images/upd/'.$upd->image_1)}}" alt="" class="img-fluid" style="width: 50px; height:40px">
+                        <img src="{{asset('images/upd/'.$upd->image_2)}}" alt="" class="img-fluid" style="width: 50px; height:40px">
+                        <img src="{{asset('images/upd/'.$upd->image_3)}}" alt="" class="img-fluid" style="width: 50px; height:40px">
+                    </td>
+
                     <td>
                     <form action="{{route('upd.destroy', $upd->id)}}" method="post">
                         <a href="{{route('upd.edit',$upd->id)}}" type="button" class="btn btn-primary">Update</a>

@@ -32,11 +32,24 @@
                   <a class="nav-link" href="{{route('siswa.index')}}">Siswa</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{{route('instruktur.index')}}">Instruktur</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('gurusenbud.index')}}">Guru Senbud</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('koordinator.index')}}">Koordinator</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{{route('upd.index')}}">Upd</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('updprod.index')}}">Upd Prod</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('senbud.index')}}">Senbud</a>
                 </li>
+
                 <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                 </li>

@@ -18,6 +18,10 @@
     <input type="text" class="form-control" name="name">
   </div>
   <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input type="text" class="form-control" name="description">
+  </div>
+  <div class="mb-3">
     <label class="form-label">tempat</label>
     <input type="text" class="form-control" name="tempat">
   </div>
@@ -29,6 +33,21 @@
     <label class="form-label">Jam</label>
     <input type="text" class="form-control" name="jam">
   </div>
+  <div class="mb-3">
+  <label for="formFile" class="form-label">Default file input example</label>
+  <input class="form-control" type="file" id="formFile" name="image_1">
+  </div>
+  <div class="mb-3">
+  <label for="formFile" class="form-label">Default file input example</label>
+  <input class="form-control" type="file" id="formFile" name="image_2">
+  </div>
+  <div class="mb-3">
+  <label for="formFile" class="form-label">Default file input example</label>
+  <input class="form-control" type="file" id="formFile" name="image_3">
+  </div>
+
+</div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 @endsection

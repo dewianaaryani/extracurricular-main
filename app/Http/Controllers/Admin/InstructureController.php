@@ -38,4 +38,10 @@ class InstructureController extends Controller
         return redirect()->route('instruktur.index')
             ->with('success','Successed add data');
     }
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+        return redirect()->route('instruktur.index')
+            ->with('success', 'Success Delete Data');
+    }
 }
