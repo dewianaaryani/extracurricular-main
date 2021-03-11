@@ -35,10 +35,16 @@
                   <a class="nav-link" href="{{route('instruktur.index')}}">Instruktur</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{{route('instrukturprod.index')}}">Instruktur Prod</a>
+                </li>
+                <li class="nav-item">
                   <a class="nav-link" href="{{route('gurusenbud.index')}}">Guru Senbud</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('koordinator.index')}}">Koordinator</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{route('pjr.index')}}">Pembimbing</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('upd.index')}}">Upd</a>

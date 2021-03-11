@@ -11,24 +11,32 @@
                         </ul>
                     </div>
                 @endif
-<form method="post" action="{{route('koordinator.update', $koordinator->id)}}" enctype="multipart/form-data" class="form-control">
+<form method="post" action="{{route('instrukturprod.store')}}" enctype="multipart/form-data" class="form-control">
 @csrf
-@method('PUT')
   <div class="mb-3">
     <label class="form-label">Name</label>
-    <input type="text" class="form-control" name="name" value="{{$koordinator->name}}">
+    <input type="text" class="form-control" name="name">
   </div>
   <div class="mb-3">
-    <label class="form-label">Nip</label>
-    <input type="text" class="form-control" name="nomor_induk" value="{{$koordinator->nomor_induk}}">
+    <label class="form-label">NIP</label>
+    <input type="text" class="form-control" name="nomor_induk">
   </div>
+  <div class="mb-3">
+    <label class="form-label">Upd Prod</label>
+    <select class="form-select" aria-label="Default select example" name="updprod_id">
+    <option selected>Open this select menu</option>
+      @foreach ($updprod as $upd)
+              <option value="{{ $upd->id }}">{{ $upd->name }}</option>
+      @endforeach        
+    </select>
+  </div>  
   <div class="mb-3">
     <label class="form-label">Username</label>
-    <input type="text" class="form-control" name="username" value="{{$koordinator->username}}">
+    <input type="text" class="form-control" name="username">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="{{$koordinator->password}}">
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

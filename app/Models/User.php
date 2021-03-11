@@ -22,9 +22,10 @@ class User extends Authenticatable
         'username',
         'password',
         'role',
-        'rombel',
-        'rayon',
+        'rombel_id',
+        'rayon_id',
         'upd_id',
+        'updprod_id',
         'senbud_id',
     ];
 

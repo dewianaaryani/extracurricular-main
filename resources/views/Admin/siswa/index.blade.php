@@ -17,6 +17,7 @@
             <th scope="col">rombel</th>
             <th scope="col">rayon</th>
             <th scope="col">upd_id</th>
+            <th scope="col">updprod_id</th>
             <th scope="col">senbud_id</th>
             <th scope="col">username</th>
             <th scope="col">passwrod</th>
@@ -29,14 +30,15 @@
                 <th scope="row">{{ ++ $i }}</th>
                     <td>{{ $siswa -> name}}</td>
                     <td>{{ $siswa -> nomor_induk}}</td>
-                    <td>{{ $siswa -> rombel_id}}</td>
-                    <td>{{ $siswa -> rayon_id}}</td>
-                    <td>{{ $siswa -> upd_id}}</td>
-                    <td>{{ $siswa -> senbud_id}}</td>
+                    <td>{{ $siswa -> rombel_name}}</td>
+                    <td>{{ $siswa -> rayon_name}}</td>
+                    <td>{{ $siswa -> upd_name}}</td>
+                    <td>{{ $siswa -> updprod_id}}</td>
+                    <td>{{ $siswa -> senbud_name}}</td>
                     <td>{{ $siswa -> username}}</td>
-                    <td>{{ $siswa -> password}}</td>
+                    <td>{{ $siswa -> password}}</td>                    
                     <td>
-                    <form action="" method="post">
+                    <form action="{{route('siswa.destroy', $siswa->id)}}" method="post">
                         <a href="{{route('siswa.edit', $siswa->id)}}" type="button" class="btn btn-primary">Update</a>
                         
                         @csrf
@@ -52,3 +54,4 @@
 </div>
 
 @endsection
+

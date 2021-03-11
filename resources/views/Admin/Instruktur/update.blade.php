@@ -11,32 +11,32 @@
                         </ul>
                     </div>
                 @endif
-<form method="post" action="{{route('gurusenbud.update', $gurusenbud->id)}}" enctype="multipart/form-data" class="form-control">
+<form method="post" action="{{route('instruktur.update', $instruktur->id)}}" enctype="multipart/form-data" class="form-control">
 @csrf
 @method('PUT')
   <div class="mb-3">
     <label class="form-label">Name</label>
-    <input type="text" class="form-control" name="name" value="{{$gurusenbud->name}}">
+    <input type="text" class="form-control" name="name" value="{{$instruktur->name}}">
   </div>
   <div class="mb-3">
     <label class="form-label">NIS</label>
-    <input type="text" class="form-control" name="nomor_induk" value="{{$gurusenbud->nomor_induk}}">
+    <input type="text" class="form-control" name="nomor_induk" value="{{$instruktur->nomor_induk}}">
   </div>
   <div class="mb-3">
-    <label class="form-label">SenBud</label>
-    <select class="form-select" aria-label="Default select example" name="senbud_id">
-      @foreach ($senbud as $senbud)
-              <option value="{{ $senbud->id }}">{{ $senbud->name }}</option>
+    <label class="form-label">Upd</label>
+    <select class="form-select" aria-label="Default select example" name="upd_id">
+      @foreach ($upd as $upd)
+              <option value="{{ $upd->id }}" {{$upd->id == $instruktur->upd_id ? 'selected="selected"' : ''}}>{{ $upd->name }}</option>
       @endforeach        
     </select>
-  </div>
+  </div>  
   <div class="mb-3">
     <label class="form-label">Username</label>
-    <input type="text" class="form-control" name="username" value="{{$gurusenbud->username}}">
+    <input type="text" class="form-control" name="username" value="{{$instruktur->username}}">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="{{$gurusenbud->password}}">
+    <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="{{$instruktur->password}}">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

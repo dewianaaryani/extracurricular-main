@@ -24,7 +24,7 @@
   <div class="mb-3">
   <label class="form-label">Rombel</label>
   <select class="form-select" aria-label="Default select example" name="rombel_id">
-      <option selected>Open this select menu</option>
+      <option>Open this select menu</option>
       @foreach ($rombel as $rombel)
               <option value="{{ $rombel->id }}">{{ $rombel->name }}</option>
       @endforeach        
@@ -33,7 +33,7 @@
   <div class="mb-3">
   <label class="form-label">Rayon</label>
   <select class="form-select" aria-label="Default select example" name="rayon_id">
-    <option selected>Open this select menu</option>
+    <option>Open this select menu</option>
       @foreach ($rayon as $rayon)
               <option value="{{ $rayon->id }}">{{ $rayon->name }}</option>
       @endforeach        
@@ -42,16 +42,25 @@
   <div class="mb-3">
     <label class="form-label">Upd</label>
     <select class="form-select" aria-label="Default select example" name="upd_id">
-    <option selected>Open this select menu</option>
+    <option>Open this select menu</option>
       @foreach ($upd as $upd)
               <option value="{{ $upd->id }}">{{ $upd->name }}</option>
       @endforeach        
     </select>
   </div>  
   <div class="mb-3">
+    <label class="form-label">Upd Prod</label>
+    <select class="form-select" aria-label="Default select example" name="updprod_id">
+    <option>Open this select menu</option>
+      @foreach ($updprod as $updprod)
+              <option value="{{ $updprod->id }}">{{ $updprod->name }}</option>
+      @endforeach        
+    </select>
+  </div>  
+  <div class="mb-3">
     <label class="form-label">SenBud</label>
     <select class="form-select" aria-label="Default select example" name="senbud_id">
-    <option selected>Open this select menu</option>
+    <option>Open this select menu</option>
       @foreach ($senbud as $senbud)
               <option value="{{ $senbud->id }}">{{ $senbud->name }}</option>
       @endforeach        

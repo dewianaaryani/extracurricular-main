@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Rayon;
 use App\Models\Ekskul;
 use App\Models\Rombel;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -25,7 +26,25 @@ class SiswaController extends Controller
         $rombel = Rombel::all();
         $upd = Ekskul::where('type','=','Upd')->get();
         $senbud= Ekskul::where('type','=','Senbud')->get();
-        $siswa = User::where('role','=','Siswa')->get();
+        $user = Auth::user();
+        
+        $siswa = User::where('role','=','Siswa')
+        ->join('ekskul as upd','upd.id','=','users.upd_id')
+        ->join('ekskul as senbud','senbud.id','=','users.senbud_id')        
+        ->join('rombel','rombel.id','=','users.rombel_id')
+        ->join('rayon','rayon.id','=','users.rayon_id')
+        ->select(   'users.id as id', 
+                    'users.nomor_induk', 
+                    'users.name', 
+                    'users.username',
+                    'users.password', 
+                    'rombel.name as rombel_name', 
+                    'rayon.name as rayon_name', 
+                    'upd.name as upd_name', 
+                    'senbud.name as senbud_name'
+                    )
+        ->get();
+        // dd($siswa);
         return view('Admin.siswa.index',compact('siswa'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }
@@ -33,16 +52,15 @@ class SiswaController extends Controller
         $rayon = Rayon::all();
         $rombel = Rombel::all();
         $upd = Ekskul::where('type','=','Upd')->get();
+        $updprod = Ekskul::where('type','=','Upd Prod')->get();
         $senbud= Ekskul::where('type','=','Senbud')->get();
-        return view('Admin.siswa.create',compact('rayon','rombel','upd','senbud'));        
+        return view('Admin.siswa.create',compact('rayon','rombel','upd','senbud','updprod'));        
     }
     public function store(Request $request){
         $request->validate([
             'name'=>'required',
             'rombel_id'=>'required',
-            'rayon_id'=>'required',
-            'upd_id'=>'required',
-            'senbud_id'=>'required',
+            'rayon_id'=>'required',            
             'username'=>'required',
             'password'=>'required',                        
         ]);
@@ -54,9 +72,10 @@ class SiswaController extends Controller
             'rombel_id' => $dataRequest['rombel_id'],
             'rayon_id' => $dataRequest['rayon_id'],
             'upd_id' => $dataRequest['upd_id'],
+            'updprod_id' => $dataRequest['updprod_id'],
             'senbud_id' => $dataRequest['senbud_id'],
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::create($data);
         return redirect()->route('siswa.index')
@@ -67,9 +86,10 @@ class SiswaController extends Controller
         $rayon = Rayon::all();
         $rombel = Rombel::all();
         $upd = Ekskul::where('type','=','Upd')->get();
+        $updprod = Ekskul::where('type','=','Upd Prod')->get();
         $senbud= Ekskul::where('type','=','Senbud')->get();
         $siswa = User::find($id);
-        return view('admin.siswa.update',compact('siswa','rayon','rombel','upd','senbud'));
+        return view('admin.siswa.update',compact('siswa','rayon','rombel','upd','senbud','updprod'));
     }
     public function update(Request $request, $id)
     {
@@ -77,9 +97,7 @@ class SiswaController extends Controller
         $request->validate([
             'name'=>'required',
             'rombel_id'=>'required',
-            'rayon_id'=>'required',
-            'upd_id'=>'required',
-            'senbud_id'=>'required',
+            'rayon_id'=>'required',            
             'username'=>'required',
             'password'=>'required',                        
         ]);
@@ -91,14 +109,22 @@ class SiswaController extends Controller
             'rombel_id' => $dataRequest['rombel_id'],
             'rayon_id' => $dataRequest['rayon_id'],
             'upd_id' => $dataRequest['upd_id'],
+            'updprod_id' => $dataRequest['updprod_id'],
             'senbud_id' => $dataRequest['senbud_id'],
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
         return redirect()->route('siswa.index')
             ->with('success','successed update');
     }
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+        return redirect()->route('siswa.index')
+            ->with('success', 'Success Delete Data');
+    }
 
     
 }
+

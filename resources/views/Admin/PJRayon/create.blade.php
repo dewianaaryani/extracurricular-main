@@ -11,7 +11,7 @@
                         </ul>
                     </div>
                 @endif
-<form method="post" action="{{route('koordinator.store')}}" enctype="multipart/form-data" class="form-control">
+<form method="post" action="{{route('pjr.store')}}" enctype="multipart/form-data" class="form-control">
 @csrf
   <div class="mb-3">
     <label class="form-label">Name</label>
@@ -21,6 +21,16 @@
     <label class="form-label">NIP</label>
     <input type="text" class="form-control" name="nomor_induk">
   </div>
+  <div class="mb-3">
+  <label class="form-label">Rayon</label>
+  <select class="form-select" aria-label="Default select example" name="rayon_id">
+    <option>Open this select menu</option>
+      @foreach ($rayon as $rayon)
+              <option value="{{ $rayon->id }}">{{ $rayon->name }}</option>
+      @endforeach        
+    </select>
+  </div>
+  
   <div class="mb-3">
     <label class="form-label">Username</label>
     <input type="text" class="form-control" name="username">

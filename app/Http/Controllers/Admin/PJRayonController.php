@@ -4,24 +4,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Ekskul;
+use App\Models\Rayon;
 
-class InstructureController extends Controller
+class PJRayonController extends Controller
 {
     public function index()
     {
-        $instruktur = User::where('role','=','Instruktur UPD')->get();
-        return view('Admin.instruktur.index',compact('instruktur'))
+        $pjr = User::where('role','=','Pembimbing Rayon')->get();
+        return view('Admin.PJRayon.index',compact('pjr'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }
     public function create(){        
-        $upd = Ekskul::where('type','=','Upd')->get();
-        return view('Admin.instruktur.create',compact('upd'));        
+        $rayon = Rayon::all();
+        return view('Admin.PJRayon.create',compact('rayon'));        
     }
     public function store(Request $request){
         $request->validate([
             'name'=>'required',
-            'upd_id'=>'required',
+            'rayon_id'=>'required',
             'username'=>'required',
             'password'=>'required',                        
         ]);
@@ -29,41 +29,41 @@ class InstructureController extends Controller
         $data = [
             'name' => $dataRequest['name'],
             'nomor_induk' => $dataRequest['nomor_induk'],
-            'role' => "Instruktur UPD",    
-            'upd_id' => $dataRequest['upd_id'],            
+            'role' => "Pembimbing Rayon",
+            'rayon_id' => $dataRequest['rayon_id'],            
             'username' => $dataRequest['username'],
             'password' => $dataRequest['password'],
         ];
         User::create($data);
-        return redirect()->route('instruktur.index')
+        return redirect()->route('pjr.index')
             ->with('success','Successed add data');
     }
 
     public function edit($id){
-        $upd = Ekskul::where('type','=','Upd')->get();        
-        $instruktur = User::find($id);
-        return view('admin.instruktur.update',compact('instruktur','upd'));
+        $rayon = Rayon::all();
+        $pjr = User::find($id);
+        return view('admin.PJRayon.update',compact('pjr','rayon'));
     }
     public function update(Request $request, $id)
     {
 
         $request->validate([
-            'name'=>'required',            
-            'upd_id'=>'required',        
+            'name'=>'required',
+            'rayon_id'=>'required',
             'username'=>'required',
-            'password'=>'required',                        
+            'password'=>'required',                           
         ]);
         $dataRequest = $request->all();
         $data=[
             'name' => $dataRequest['name'],
             'nomor_induk' => $dataRequest['nomor_induk'],
-            'role' => "Instruktur UPD",
-            'upd_id' => $dataRequest['upd_id'],
+            'role' => "Pembimbing Rayon",
+            'rayon_id' => $dataRequest['rayon_id'],            
             'username' => $dataRequest['username'],
             'password' => $dataRequest['password'],
         ];
         User::find($id)->update($data);
-        return redirect()->route('instruktur.index')
+        return redirect()->route('pjr.index')
             ->with('success','successed update');
     }
 
@@ -71,7 +71,7 @@ class InstructureController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('instruktur.index')
+        return redirect()->route('pjr.index')
             ->with('success', 'Success Delete Data');
     }
 }

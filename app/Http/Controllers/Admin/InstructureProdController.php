@@ -6,20 +6,22 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ekskul;
 
-class KoordinatorUpdController extends Controller
+class InstructureProdController extends Controller
 {
     public function index()
     {
-        $koordinator = User::where('role','=','Koordinator Upd Prod')->get();
-        return view('Admin.koordinatorupd.index',compact('koordinator'))
+        $instrukturprod = User::where('role','=','Instruktur UPD Prod')->get();
+        return view('Admin.instrukturprod.index',compact('instrukturprod'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }
-    public function create(){                
-        return view ('admin.koordinatorupd.create');
+    public function create(){        
+        $updprod = Ekskul::where('type','=','Upd Prod')->get();
+        return view('Admin.instrukturprod.create',compact('updprod'));        
     }
     public function store(Request $request){
         $request->validate([
-            'name'=>'required',            
+            'name'=>'required',
+            'updprod_id'=>'required',
             'username'=>'required',
             'password'=>'required',                        
         ]);
@@ -27,41 +29,51 @@ class KoordinatorUpdController extends Controller
         $data = [
             'name' => $dataRequest['name'],
             'nomor_induk' => $dataRequest['nomor_induk'],
-            'role' => "Koordinator Upd Prod",    
+            'role' => "Instruktur UPD Prod",    
+            'updprod_id' => $dataRequest['updprod_id'],            
             'username' => $dataRequest['username'],
             'password' => $dataRequest['password'],
         ];
         User::create($data);
-        return redirect()->route('koordinatorupd.index')
+        return redirect()->route('instrukturprod.index')
             ->with('success','Successed add data');
     }
-    public function edit($id){                
-        $koordinator = User::find($id);
-        return view('Admin.koordinatorupd.update',compact('koordinator'));        
+
+    public function edit($id){        
+        $updprod = Ekskul::where('type','=','Upd Prod')->get();
+        $instrukturprod = User::find($id);
+        return view('admin.instrukturprod.update',compact('instrukturprod','updprod'));
     }
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
+
         $request->validate([
             'name'=>'required',            
+            'updprod_id'=>'required',        
             'username'=>'required',
             'password'=>'required',                        
         ]);
         $dataRequest = $request->all();
-        $data = [
+        $data=[
             'name' => $dataRequest['name'],
             'nomor_induk' => $dataRequest['nomor_induk'],
-            'role' => "Koordinator Senbud & UPD",                   
+            'role' => "Instruktur UPD Prod",
+            'updprod_id' => $dataRequest['updprod_id'],
             'username' => $dataRequest['username'],
             'password' => $dataRequest['password'],
         ];
         User::find($id)->update($data);
-        return redirect()->route('koordinatorupd.index')
-            ->with('success','Successed Update data');
+        return redirect()->route('instrukturprod.index')
+            ->with('success','successed update');
     }
+
+
+
 
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('koordinatorupd.index')
+        return redirect()->route('instrukturprod.index')
             ->with('success', 'Success Delete Data');
     }
 

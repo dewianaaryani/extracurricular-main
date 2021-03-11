@@ -27,7 +27,7 @@
   <select class="form-select" aria-label="Default select example" name="rombel_id">
   
       @foreach ($rombel as $rombel)
-              <option value="{{ $rombel->id }}" {{$siswa->rombel_id == 'rombel_id' ? 'selected="selected"' : ''}}>{{ $rombel->name }}</option>
+              <option value="{{ $rombel->id }}" {{$rombel->id == 'siswa->rombel_id' ? 'selected="selected"' : ''}}>{{ $rombel->name }}</option>
       @endforeach        
     </select>
   </div>
@@ -36,7 +36,7 @@
   <select class="form-select" aria-label="Default select example" name="rayon_id">
     <option>Open this select menu</option>
       @foreach ($rayon as $rayon)
-              <option value="{{ $rayon->id }}">{{ $rayon->name }}</option>
+              <option value="{{ $rayon->id }}" {{$rayon->id == $siswa->rayon_id ? 'selected="selected"' : ''}}>{{ $rayon->name }}</option>
       @endforeach        
     </select>
   </div>
@@ -45,16 +45,25 @@
     <select class="form-select" aria-label="Default select example" name="upd_id">
     <option >Open this select menu</option>
       @foreach ($upd as $upd)
-              <option value="{{ $upd->id }}">{{ $upd->name }}</option>
+              <option value="{{ $upd->id }}" {{$upd->id == $siswa->upd_id ? 'selected="selected"' : ''}}>{{ $upd->name }}</option>
+      @endforeach        
+    </select>
+  </div>  
+  <div class="mb-3">
+    <label class="form-label">Upd Prod</label>
+    <select class="form-select" aria-label="Default select example" name="updprod_id">
+    <option >Open this select menu</option>
+      @foreach ($updprod as $updprod)
+              <option value="{{ $updprod->id }}" {{$updprod->id == $siswa->updprod_id ? 'selected="selected"' : ''}}>{{ $updprod->name }}</option>
       @endforeach        
     </select>
   </div>  
   <div class="mb-3">
     <label class="form-label">SenBud</label>
     <select class="form-select" aria-label="Default select example" name="senbud_id">
-    <option selected>Open this select menu</option>
+    <option>Open this select menu</option>
       @foreach ($senbud as $senbud)
-              <option value="{{ $senbud->id }}">{{ $senbud->name }}</option>
+              <option value="{{ $senbud->id }}" {{$senbud->id == $siswa->senbud_id ? 'selected="selected"' : ''}}>{{ $senbud->name }}</option>
       @endforeach        
     </select>
   </div>
