@@ -31,16 +31,18 @@ class SiswaController extends Controller
         $siswa = User::where('role','=','Siswa')
         ->join('ekskul as upd','upd.id','=','users.upd_id')
         ->join('ekskul as senbud','senbud.id','=','users.senbud_id')        
+        ->join('ekskul as updprod','updprod.id','=','users.updprod_id')        
         ->join('rombel','rombel.id','=','users.rombel_id')
         ->join('rayon','rayon.id','=','users.rayon_id')
         ->select(   'users.id as id', 
                     'users.nomor_induk', 
-                    'users.name', 
+                    'users.name',
                     'users.username',
                     'users.password', 
                     'rombel.name as rombel_name', 
                     'rayon.name as rayon_name', 
                     'upd.name as upd_name', 
+                    'updprod.name as updprod_name', 
                     'senbud.name as senbud_name'
                     )
         ->get();

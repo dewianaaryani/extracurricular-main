@@ -13,7 +13,10 @@ use App\Http\Controllers\Admin\GurusenbudController as AdminGS;
 use App\Http\Controllers\Admin\PJRayonController as AdminPJR;
 use App\Http\Controllers\Admin\KoordinatorController as AdminKoordinator;
 use App\Http\Controllers\Admin\UpdprodController as AdminUpdprod;
+use App\Http\Controllers\Admin\ContentController as AdminContent;
 use App\Http\Controllers\Admin\LoginController as AdminLogin;
+use App\Http\Controllers\PageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,10 +27,21 @@ use App\Http\Controllers\Admin\LoginController as AdminLogin;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [PageController::class, 'landing']);
+Route::get('about', [PageController::class, 'about']);
+Route::get('contact', [PageController::class, 'contact']);
+Route::get('upd', [PageController::class, 'upd']);
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('upd', function () {
+    return view('dashboard.upd');
 });
+Route::get('updprod', function () {
+    return view('dashboard.updprod');
+});
+Route::get('senbud', function () {
+    return view('dashboard.senbud');
+});
+
 Route::prefix('admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('/', AdminUser::class);
@@ -43,6 +57,8 @@ Route::prefix('admin')->group(function () {
         Route::resource('gurusenbud', AdminGS::class);
         Route::resource('pjr', AdminPJR::class);
         Route::resource('koordinator', AdminKoordinator::class);
+        Route::get('content', [AdminContent::class, 'index'])->name('admin.form.content');
+        Route::post('content', [AdminContent::class, 'save'])->name('admin.form.content.post');
         
     });
     

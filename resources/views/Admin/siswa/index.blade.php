@@ -33,7 +33,7 @@
                     <td>{{ $siswa -> rombel_name}}</td>
                     <td>{{ $siswa -> rayon_name}}</td>
                     <td>{{ $siswa -> upd_name}}</td>
-                    <td>{{ $siswa -> updprod_id}}</td>
+                    <td>{{ $siswa -> updprod_name}}</td>
                     <td>{{ $siswa -> senbud_name}}</td>
                     <td>{{ $siswa -> username}}</td>
                     <td>{{ $siswa -> password}}</td>                    

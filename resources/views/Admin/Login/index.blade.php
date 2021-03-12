@@ -1,7 +1,41 @@
-@extends('Admin.layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>UPD & Senbud</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{{ asset('assets/upd_senbud/img/logowk.png') }}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/vendor/bootstrap/css/bootstrap.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/vendor/animate/animate.css')}}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/vendor/css-hamburgers/hamburgers.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/vendor/select2/select2.min.css')}}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/upd_senbud/Login_v1/css/main.css')}}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{{asset('assets/upd_senbud/images/img-01.png')}}" alt="IMG">
+				</div>
 
-@section('content')
-                @if($errors->any())
+				<form class="login100-form validate-form" method="post" action="{{route('logged_in')}}" enctype="multipart/form-data">
+				@csrf
+					<span class="login100-form-title">
+						Member Login
+					</span>
+					@if($errors->any())
                     <div class="alert alert-danger" role="alert">
                         <strong>Whoops!</strong> There were some problems with your input.<br><br>
                         <ul>
@@ -10,17 +44,61 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
-<form method="post" action="{{route('logged_in')}}" enctype="multipart/form-data" class="form-control">
-@csrf
-  <div class="mb-3">
-    <label class="form-label">Username</label>
-    <input type="text" class="form-control" name="username">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input type="text" class="form-control" name="password">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-@endsection
+                	@endif
+					<div class="wrap-input100 validate-input" data-validate = "Username is required">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Login
+						</button>
+					</div>
+					<div class="text-center p-t-12">
+						
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="{{asset('assets/upd_senbud/Login_v1/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{asset('assets/upd_senbud/Login_v1/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{asset('assets/upd_senbud/Login_v1/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{asset('assets/upd_senbud/Login_v1/vendor/select2/select2.min.js')}}"></script>
+<!--===============================================================================================-->
+	<script src="{{asset('assets/upd_senbud/Login_v1/vendor/tilt/tilt.jquery.min.js')}}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{{asset('assets/upd_senbud/Login_v1/js/main.js')}}"></script>
+
+</body>
+</html>

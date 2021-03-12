@@ -54,11 +54,12 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('senbud.index')}}">Senbud</a>
-                </li>
-
                 <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  <a class="nav-link" href="{{route('admin.form.content')}}">Content</a>
                 </li>
+                </li>
+                <a class="btn btn-success" href="{{url('admin/logout')}}">Logout</a> 
+                
             </ul>
             </div>
         </div>
