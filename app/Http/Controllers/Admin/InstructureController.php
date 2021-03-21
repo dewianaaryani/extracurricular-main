@@ -10,7 +10,15 @@ class InstructureController extends Controller
 {
     public function index()
     {
-        $instruktur = User::where('role','=','Instruktur UPD')->get();
+        $instruktur = User::where('role','=','Instruktur UPD')
+        ->join('ekskul as upd','upd.id','=','users.upd_id')        
+        ->select(   'users.id as id', 
+                    'users.nomor_induk', 
+                    'users.name',
+                    'users.username',
+                    'users.password', 
+                    'upd.name as upd_name')
+        ->get();
         return view('Admin.instruktur.index',compact('instruktur'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }

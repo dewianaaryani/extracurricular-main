@@ -10,7 +10,15 @@ class PJRayonController extends Controller
 {
     public function index()
     {
-        $pjr = User::where('role','=','Pembimbing Rayon')->get();
+        $pjr = User::where('role','=','Pembimbing Rayon')
+        ->join('rayon','rayon.id','=','users.rayon_id')        
+        ->select(   'users.id as id', 
+                    'users.nomor_induk', 
+                    'users.name',
+                    'users.username',
+                    'users.password', 
+                    'rayon.name as rayon_name')
+        ->get();
         return view('Admin.PJRayon.index',compact('pjr'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }

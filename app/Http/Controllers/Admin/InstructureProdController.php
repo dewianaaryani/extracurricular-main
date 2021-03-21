@@ -10,7 +10,15 @@ class InstructureProdController extends Controller
 {
     public function index()
     {
-        $instrukturprod = User::where('role','=','Instruktur UPD Prod')->get();
+        $instrukturprod = User::where('role','=','Instruktur UPD Prod')
+        ->join('ekskul as updprod','updprod.id','=','users.updprod_id')        
+        ->select(   'users.id as id', 
+                    'users.nomor_induk', 
+                    'users.name',
+                    'users.username',
+                    'users.password', 
+                    'updprod.name as updprod_name')
+        ->get();
         return view('Admin.instrukturprod.index',compact('instrukturprod'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }

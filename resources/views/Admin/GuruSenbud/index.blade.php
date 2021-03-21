@@ -1,48 +1,80 @@
-@extends('Admin.layout')
-
+@extends('admin.layout.app')
+@section('title','Guru Senbud')
+@section('breadcrumb')
+                <div class="breadcrumb-item active"><a href="{{url('admin/')}}">Dashboard</a></div>              
+              <div class="breadcrumb-item">Guru Senbud</div>
+@endsection
 @section('content')
     @if ($message = Session::get('success'))
         <div class="alert alert-success" role="alert">
             <p>{{ $message }}</p>
         </div>
     @endif
-<a class="btn btn-success" href="{{route('gurusenbud.create')}}">Add</a>
-<div class="form-control">
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Nip</th>            
-            <th scope="col">Senbud</th>
-            <th scope="col">username</th>
-            <th scope="col">passwrod</th>
-            <th scope="col">action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($gurusenbud as $gurusenbud)    
-                <tr>
-                <th scope="row">{{ ++ $i }}</th>
-                    <td>{{ $gurusenbud -> name}}</td>
-                    <td>{{ $gurusenbud -> nomor_induk}}</td>                    
-                    <td>{{ $gurusenbud -> senbud_id}}</td>                    
-                    <td>{{ $gurusenbud -> username}}</td>
-                    <td>{{ $gurusenbud -> password}}</td>
-                    <td>
-                    <form action="{{route('gurusenbud.destroy', $gurusenbud->id)}}" method="post">
-                        <a href="{{route('gurusenbud.edit', $gurusenbud->id)}}" type="button" class="btn btn-primary">Update</a>
-                        
-                        @csrf
-                        @method('DELETE')               
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                    </td>
 
-                </tr>        
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    <div class="row">            
+                <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                    <h4>Daftar Guru Senbud</h4>
+                    <div class="card-header-action">
+                        <a class="btn btn-success" href="{{route('gurusenbud.create')}}">Add</a>  
+                    </div>
+            
+                    </div>
+                    <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-md">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>NIP</th>
+                            <th>SENBUD</th>
+                            <th>Username</th>
+                            
+                            <th>Action</th>
+                        </tr>
+                        @foreach($gurusenbud as $gurusenbud)    
+                        <tr>
+                            <td>{{ ++ $i }}</td>
+                            <td>{{ $gurusenbud -> name}}</td>
+                            <td>{{ $gurusenbud -> nomor_induk}}</td>
+                            <td>{{ $gurusenbud -> senbud_name}}</td>
+                            <td>{{ $gurusenbud -> username}}</td>                            
+                            <td>
+                                <form action="{{route('gurusenbud.destroy', $gurusenbud->id)}}" method="post">
+                                    <a href="{{route('gurusenbud.edit', $gurusenbud->id)}}" type="button" class="btn btn-primary">Update</a>
+                                    
+                                    @csrf
+                                    @method('DELETE')               
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>   
+                        @endforeach                     
+                        </table>
+                    </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <nav class="d-inline-block">
+                            <ul class="pagination mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
 
 @endsection

@@ -1,6 +1,12 @@
-@extends('Admin.layout')
-
+@extends('admin.layout.app')
+@section('title','Koordinator Senbud & UPD')
+@section('breadcrumb')
+                <div class="breadcrumb-item active"><a href="{{url('admin/')}}">Dashboard</a></div>              
+                <div class="breadcrumb-item active"><a href="{{url('koordinator.index')}}">Koordinator Senbud & UPD</a></div>              
+              <div class="breadcrumb-item">Add Koordinator Senbud & UPD</div>
+@endsection
 @section('content')
+
                 @if($errors->any())
                     <div class="alert alert-danger" role="alert">
                         <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -11,24 +17,44 @@
                         </ul>
                     </div>
                 @endif
-<form method="post" action="{{route('koordinator.store')}}" enctype="multipart/form-data" class="form-control">
+<div class="row">
+  <div class="col-12">
+<form method="post" action="{{route('koordinator.store')}}" enctype="multipart/form-data" class="">
 @csrf
-  <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input type="text" class="form-control" name="name">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">NIP</label>
-    <input type="text" class="form-control" name="nomor_induk">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Username</label>
-    <input type="text" class="form-control" name="username">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="card card-primary">      
+      <div class="card-header"><h4>Add Data</h4></div>
+      <div class="card-body">
+          <div class="row">
+            <div class="form-group col-8">
+              <label for="name">Name</label>
+              <input id="name" type="text" class="form-control" name="name" autofocus>
+            </div>
+            <div class="form-group col-4">
+              <label for="nip">NIP</label>
+              <input id="nomor_induk" type="text" class="form-control" name="nomor_induk">
+            </div>
+          </div>      
+          <div class="row">
+            <div class="form-group col-6">
+              <label for="username">Username</label>
+              <input id="username" type="username" class="form-control" name="username">
+              <div class="invalid-feedback">
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label for="password" class="d-block">Password</label>
+              <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">                      
+            </div>                    
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Add
+            </button>
+          </div>
+      </div>
+    </div>
 </form>
+</div>
+</div>        
 @endsection

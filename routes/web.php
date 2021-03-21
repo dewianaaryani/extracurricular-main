@@ -35,6 +35,7 @@ Route::get('upd', [PageController::class, 'upd']);
 Route::get('upd', function () {
     return view('dashboard.upd');
 });
+
 Route::get('updprod', function () {
     return view('dashboard.updprod');
 });
@@ -44,21 +45,30 @@ Route::get('senbud', function () {
 
 Route::prefix('admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
-        Route::resource('/', AdminUser::class);
-        Route::resource('user', AdminUser::class);
-        Route::resource('rombel', AdminRombel::class);
-        Route::resource('rayon', AdminRayon::class);
-        Route::resource('siswa', AdminSiswa::class);
-        Route::resource('upd', AdminUpd::class);
-        Route::resource('senbud', AdminSenbud::class);
-        Route::resource('updprod', AdminUpdprod::class);
-        Route::resource('instruktur', AdminInstruktur::class);
-        Route::resource('instrukturprod', AdminInstrukturProd::class);
-        Route::resource('gurusenbud', AdminGS::class);
-        Route::resource('pjr', AdminPJR::class);
-        Route::resource('koordinator', AdminKoordinator::class);
-        Route::get('content', [AdminContent::class, 'index'])->name('admin.form.content');
-        Route::post('content', [AdminContent::class, 'save'])->name('admin.form.content.post');
+        
+        Route::group(['middleware' => ['cek_login:Siswa']], function(){
+            Route::resource('siswa', AdminSiswa::class);
+        });        
+        Route::group(['middleware' => ['cek_login:Koordinator Senbud & UPD']], function(){
+            Route::resource('siswa', AdminSiswa::class);
+            Route::resource('upd', AdminUpd::class);
+            Route::resource('gurusenbud', AdminGS::class);
+            Route::resource('senbud', AdminSenbud::class);
+            Route::resource('updprod', AdminUpdprod::class);
+            Route::resource('instruktur', AdminInstruktur::class);
+            Route::resource('instrukturprod', AdminInstrukturProd::class);            
+            Route::resource('pjr', AdminPJR::class);
+            Route::resource('koordinator', AdminKoordinator::class);
+            Route::get('content', [AdminContent::class, 'index'])->name('admin.form.content');
+            Route::post('content', [AdminContent::class, 'save'])->name('admin.form.content.post');             
+            Route::resource('user', AdminUser::class);
+            Route::resource('rombel', AdminRombel::class);
+            Route::resource('rayon', AdminRayon::class);        
+        });        
+        Route::get('/', function () {
+            return view('admin.layout.dashboard');
+        });            
+        
         
     });
     

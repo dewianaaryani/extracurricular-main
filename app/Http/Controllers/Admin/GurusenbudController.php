@@ -10,7 +10,16 @@ class GurusenbudController extends Controller
 {
     public function index()
     {
-        $gurusenbud = User::where('role','=','Guru Senbud')->get();
+        $gurusenbud = User::where('role','=','Guru Senbud')
+        ->join('ekskul as senbud','senbud.id','=','users.senbud_id')        
+        ->select(   'users.id as id', 
+                    'users.nomor_induk', 
+                    'users.name',
+                    'users.username',
+                    'users.password', 
+                    'senbud.name as senbud_name')
+        ->get();
+        // dd($gurusenbud);
         return view('Admin.gurusenbud.index',compact('gurusenbud'))
             ->with('i', (request()->input('page', 1) -1)*5);
     }

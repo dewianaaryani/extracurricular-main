@@ -29,8 +29,29 @@ class LoginController extends Controller
         // dd(Auth::attempt($credentials));
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            
+            if (Auth::attempt($credentials)) {
+                # code..
+                $user = Auth::user();
+                //dd($user);
+                if ($user->role == 'Siswa') {
+                    return redirect()->intended('admin/siswa');
+                }elseif($user->role == 'Koordinator Senbud & UPD'){
+                    return redirect()->intended('admin/koordinator');
+                }elseif($user->role == 'Instruktur UPD'){
+                    return redirect()->intended('admin/');                
+                }
+                elseif($user->role == 'Instruktur UPD Pord'){
+                    return redirect()->intended('admin/');                
+                }
+                elseif($user->role == 'Guru Senbud'){
+                    return redirect()->intended('admin/');                
+                }
 
-            return redirect()->intended('admin/');
+                return redirect()->intended('admin/');
+            }
+
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([

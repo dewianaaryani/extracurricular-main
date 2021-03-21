@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Cek_login
 {
@@ -14,8 +15,16 @@ class Cek_login
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next,$role)
     {
-        return $next($request);
+        if(!Auth::check()){
+            return redirect('admin/login');
+        }
+        $user = Auth::user();
+        if($user->role == $role){
+            return $next($request);
+        }
+
+        return redirect('admin/login')->with('error',"You don't have any access");
     }
 }
