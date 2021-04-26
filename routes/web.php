@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\KoordinatorController as AdminKoordinator;
 use App\Http\Controllers\Admin\UpdprodController as AdminUpdprod;
 use App\Http\Controllers\Admin\ContentController as AdminContent;
 use App\Http\Controllers\Admin\LoginController as AdminLogin;
+use App\Http\Controllers\Admin\AbsenController as AdminAbsen;
 use App\Http\Controllers\PageController;
 
 /*
@@ -28,13 +29,15 @@ use App\Http\Controllers\PageController;
 |
 */
 Route::get('/', [PageController::class, 'landing']);
+Route::get('upd', [PageController::class, 'upd']);
 Route::get('about', [PageController::class, 'about']);
-Route::get('contact', [PageController::class, 'contact']);
+
 Route::get('upd', [PageController::class, 'upd']);
 
-Route::get('upd', function () {
-    return view('dashboard.upd');
+Route::get('contact', function () {
+    return view('dashboard.kontak');
 });
+
 
 Route::get('updprod', function () {
     return view('dashboard.updprod');
@@ -64,6 +67,7 @@ Route::prefix('admin')->group(function () {
             Route::resource('user', AdminUser::class);
             Route::resource('rombel', AdminRombel::class);
             Route::resource('rayon', AdminRayon::class);        
+            Route::resource('absen', AdminAbsen::class);        
         });        
         Route::get('/', function () {
             return view('admin.layout.dashboard');
@@ -76,6 +80,7 @@ Route::prefix('admin')->group(function () {
     Route::post('logged_in', [AdminLogin::class, 'authenticate'])->name('logged_in');
     Route::get('login', [AdminLogin::class, 'index'])->name('login');
 });
+
 
 
 

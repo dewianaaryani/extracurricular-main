@@ -19,5 +19,10 @@ class PageController extends Controller
         $content = Content::find(1);        
         return view('dashboard.about', compact('content'));
     }
-
+    public function upd()
+    {
+        $content = Content::find(1);        
+        $upd = Ekskul::latest()->where('type','=','Upd');
+        return view('dashboard.upd', compact('content','upd'));
+    }
 }

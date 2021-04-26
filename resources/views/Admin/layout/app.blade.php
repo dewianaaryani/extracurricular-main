@@ -78,17 +78,18 @@
                <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>SENBUD & UPD</span></a>
                 <ul class="dropdown-menu">                  
-                  <li><a class="nav-link" href="layout-default.html"><i class="fas fa-drum"></i> <span>SENBUD</span></a></li>
-                  <li><a class="nav-link" href="layout-default.html"><i class="fas fa-basketball-ball"></i> <span>UPD</span></a></li>                  
-                  <li><a class="nav-link" href="layout-default.html"><i class="fas fa-tv"></i> <span>UPD PROD</span></a></li>
+                  <li><a class="nav-link" href="{{route('senbud.index')}}"><i class="fas fa-drum"></i> <span>SENBUD</span></a></li>
+                  <li><a class="nav-link" href="{{route('upd.index')}}"><i class="fas fa-basketball-ball"></i> <span>UPD</span></a></li>                  
+                  <li><a class="nav-link" href="{{route('updprod.index')}}"><i class="fas fa-tv"></i> <span>UPD PROD</span></a></li>
                 </ul>
                </li>
+               <li class="nav-item\">                  
+                <a href="{{route('admin.form.content')}}" class="nav-link" data-toggle=""><i class="fas fa-users"></i> <span>Content</span></a>                
+               </li>
                <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Content</span></a>
+                <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Absen</span></a>
                 <ul class="dropdown-menu">                  
-                    <li><a class="nav-link" href="layout-default.html"><i class="fas fa-drum"></i> <span>SENBUD</span></a></li>
-                  <li><a class="nav-link" href="layout-default.html"><i class="fas fa-basketball-ball"></i><span>UPD</span></a></li>                  
-                  <li><a class="nav-link" href="layout-default.html"><i class="fas fa-tv"></i> <span>UPD PROD</span></a></li>
+                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Detail</span></a></li>                                    
                 </ul>
                </li>
               </li>

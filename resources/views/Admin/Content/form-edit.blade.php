@@ -1,5 +1,9 @@
-@extends('Admin.layout')
-
+@extends('Admin.layout.app')
+@section('title','Content')
+@section('breadcrumb')
+                <div class="breadcrumb-item active"><a href="{{url('admin/')}}">Dashboard</a></div>              
+              <div class="breadcrumb-item">Content</div>
+@endsection
 @section('content')
                 @if($errors->any())
                     <div class="alert alert-danger" role="alert">
@@ -11,16 +15,17 @@
                         </ul>
                     </div>
                 @endif
-<form method="post" action="{{route('admin.form.content.post')}}" enctype="multipart/form-data" class="form-control">
-@csrf
-  
+                
+<form method="post" action="{{route('admin.form.content.post')}}" enctype="multipart/form-data" class="">
+@csrf  
+
   <div class="form-group">
     <label for="exampleFormControlTextarea1">SIM UPD & Senbud Desc</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="home_desc">{{$content->home_desc}}</textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1"  name="home_desc">{{$content->home_desc}}</textarea>
   </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">About SIM UPD Senbud Desc</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="about_desc">{{$content->about_desc}}</textarea>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="about_desc">{{$content->about_desc}}</textarea>
   </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Contact Desc</label>
@@ -45,4 +50,5 @@
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
 @endsection

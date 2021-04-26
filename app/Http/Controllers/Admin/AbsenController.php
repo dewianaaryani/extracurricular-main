@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
-
+use App\Models\User;
+use App\Models\Ekskul;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AbsenController extends Controller
@@ -18,10 +20,15 @@ class AbsenController extends Controller
 
 
     public function index()
-    {
-        $absen = Absen::latest()->paginate(5);
-        return view('Admin.absen.index',compact('absen'))
-            ->with('i', (request()->input('page', 1) -1)*5);
+    {   
+        $ekskul = Ekskul::all();
+        $user = User::all();
+
+        if($user)
+        
+        // $absen = Absen::latest()->paginate(5);
+        // return view('Admin.absen.index',compact('absen'))
+        //     ->with('i', (request()->input('page', 1) -1)*5);
     }
     public function create()
     {

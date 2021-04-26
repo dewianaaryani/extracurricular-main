@@ -35,15 +35,16 @@ class SenbudController extends Controller
             'tempat'=>'required',
             'hari' => 'required',
             'jam' => 'required',
+            
         ]);
         $dataRequest = $request->all();
         $data = [
             'name' => $dataRequest['name'],
+            'description' => $dataRequest['description']  ,
             'tempat' => $dataRequest['tempat'],
             'type' => "Senbud",
             'hari' => $dataRequest['hari'],
             'jam' => $dataRequest['jam'],    
-            'description' => $dataRequest['description'],  
         ];
         if(!empty($dataRequest['image_1'])){
             $imageName = date('ymdhis').'_image_1.'.$request->image_1->extension();
@@ -81,11 +82,11 @@ class SenbudController extends Controller
         $data = [
         
             'name' => $dataRequest['name'],
+            'description' => $dataRequest['description'],                        
             'tempat' => $dataRequest['tempat'],
             'type' => "Senbud",
             'hari' => $dataRequest['hari'],
             'jam' => $dataRequest['jam'],  
-            'description' => $dataRequest['description'],                        
         ];
         if(!empty($dataRequest['image_1'])){
             $imageName = date('ymdhis').'_image_1.'.$request->image_1->extension();

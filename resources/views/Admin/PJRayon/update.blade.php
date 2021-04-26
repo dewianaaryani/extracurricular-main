@@ -53,8 +53,10 @@
               <select class="form-control selectric" name="rayon_id">
               <option>Open this select menu</option>
               @foreach ($rayon as $rayon)
-              <option value="{{ $rayon->id }}" {{$rayon->id == $pjr->rayon_id ? 'selected="selected"' : ''}}>{{ $rayon->name }}</option>
-      @endforeach      
+                <option value="{{ $rayon->id }}" {{$rayon->id == $pjr->rayon_id ? 'selected="selected"' : ''}}>
+                  {{ $rayon->name }}
+                </option>
+              @endforeach      
               </select>
             </div>                    
           </div>                  

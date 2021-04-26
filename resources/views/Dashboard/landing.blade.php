@@ -51,16 +51,23 @@
 						<div class="col-sm-12">
 							<div class="main-banner">
 								<div class="d-sm-flex justify-content-between">
-									<div data-aos="zoom-in-up">
-										<div class="banner-title">
-												<h3 class="font-weight-medium">SIM UPD & Seni Budaya
-											</h3>
+									<div class="row">
+										<div class="col-6">
+											<div data-aos="zoom-in-up" >
+												<div class="banner-title" style="padding-top: 60px;">
+														<h3 class="font-weight-medium">SIM UPD & Seni Budaya
+													</h3>
+												</div>
+												<div class="description" style="padding-right: 20px;">
+													<p class="mt-3">{{$content -> home_desc}}</p>
+												</div>
+											</div>
 										</div>
-										<p class="mt-3">{{$content -> home_desc}}</p>
-										
-									</div>
-									<div class="mt-5 mt-lg-0">
-										<img src="{{asset('assets/upd_senbud/images/group.png')}}" alt="marsmello" class="img-fluid" data-aos="zoom-in-up">
+										<div class="col-6">
+											<div class="mt-5 mt-lg-0 ml-400">
+												<img src="{{asset('assets/upd_senbud/images/group.png')}}" alt="marsmello" class="img-fluid" data-aos="zoom-in-up">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -72,7 +79,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6" data-aos="fade-up">							
-							<h3 class="font-weight-medium text-dark">About</h3>							
+							<h3 class="font-weight-medium text-dark"  style="padding-top: 100px;">About</h3>							
 							<p class="font-weight-medium mb-4">{{$content -> about_desc}}</p>
 							
 						</div>
@@ -89,7 +96,7 @@
 					<div class="row">
 						<div class="col-sm-6" data-aos="fade-up">
 							
-							<h3 class="font-weight-medium text-dark">Contact</h3>
+							<h3 class="font-weight-medium text-dark" style="padding-top: 100px;">Contact</h3>
 							<p class="font-weight-medium mb-4">{{$content -> contact_desc}}
 							</p>							
 						</div>

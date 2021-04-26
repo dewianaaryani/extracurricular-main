@@ -51,9 +51,15 @@
 						<div class="col-sm-12">
 							<div class="main-banner">
 								<div class="d-sm-flex justify-content-between">
-									@yield('banner-title')
-									<div class="mt-5 mt-lg-0">
-										<img src="{{asset('assets/upd_senbud/images/group.png')}}" alt="marsmello" class="img-fluid" data-aos="zoom-in-up">
+									<div class="row">
+										<div class="col-6">
+											@yield('banner-title')
+										</div>
+										<div class="col-6">
+											<div class="mt-5 mt-lg-0">
+												<img src="{{asset('assets/upd_senbud/images/group.png')}}" alt="marsmello" class="img-fluid" data-aos="zoom-in-up">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -65,7 +71,7 @@
 			
 		</div>
         <footer class="footer">
-			<div class="footer-top">
+			<div class="footer-top mt-5">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">

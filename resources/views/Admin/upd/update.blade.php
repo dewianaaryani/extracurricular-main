@@ -1,42 +1,82 @@
-@extends('Admin.layout')
-
+@extends('Admin.layout.app')
+@section('title','Update UPD')
+@section('breadcrumb')
+      <div class="breadcrumb-item active"><a href="{{url('admin/')}}">Dashboard</a></div>              
+      <div class="breadcrumb-item"><a href="{{route('upd.index')}}">UPD</a></div>
+    <div class="breadcrumb-item">UPD</div>
+@endsection
 @section('content')
+                @if($errors->any())
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-<form method="post" enctype="multipart/form-data" action="{{route('upd.update', $upd->id)}}" class="form-control">
-    @csrf
-    @method('PUT')
-  <div class="mb-3">
-    <label class="form-label">Name</label>
-    <input type="text" class="form-control" name="name" value="{{$upd->name}}">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Desc</label>
-    <input type="text" class="form-control" name="description" value="{{$upd->description}}">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Tempat</label>
-    <input type="text" class="form-control" name="tempat" value="{{$upd->tempat}}">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Hari</label>
-    <input type="text" class="form-control" name="hari" value="{{$upd->hari}}">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Jam</label>
-    <input type="text" class="form-control" name="jam" value="{{$upd->jam}}">
-  </div>
-  <div class="mb-3">
-  <label for="formFile" class="form-label">Default file input example</label>
-  <input class="form-control" type="file" id="formFile" name="image_1">
-  </div>
-  <div class="mb-3">
-  <label for="formFile" class="form-label">Default file input example</label>
-  <input class="form-control" type="file" id="formFile" name="image_2">
-  </div>
-  <div class="mb-3">
-  <label for="formFile" class="form-label">Default file input example</label>
-  <input class="form-control" type="file" id="formFile" name="image_3">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+<div class="row">
+  <div class="col-12">
+<form method="post" action="{{route('upd.update', $upd->id)}}" enctype="multipart/form-data" >
+@csrf
+@method('PUT')
+<div class="card card-primary">      
+      <div class="card-header"><h4>Add Data</h4></div>
+      <div class="card-body">
+          <div class="row">
+            <div class="form-group col-12">
+              <label for="name">Name</label>
+              <input id="name" type="text" class="form-control" name="name" value="{{$upd -> name}}" autofocus>
+            </div>
+          </div>      
+          <div class="row">
+            <div class="form-group col-12">
+                <label class="">Description</label>
+                <div class="col-12">
+                  <textarea class="summernote-simple form-control" name="description">{{$upd -> description}}</textarea>                  
+                </div>
+            </div>
+          </div>    
+          <div class="row">
+            <div class="form-group col-4">
+              <label for="tempat">Tempat</label>
+              <input id="tempat" type="text" class="form-control" name="tempat" value="{{$upd -> tempat}}">
+            </div>
+            <div class="form-group col-4">
+              <label for="hari">Hari</label>
+              <input id="hari" type="text" class="form-control" name="hari" value="{{$upd -> hari}}">
+            </div>
+            <div class="form-group col-4">
+              <label for="jam">Jam</label>
+              <input id="jam" type="text" class="form-control" name="jam" value="{{$upd -> jam}}">
+            </div>
+          </div>          
+          <div class="form-group">
+            <div class="row">
+                <div class="col-4">
+                  <label>Image 1</label>
+                  <input type="file" class="form-control" name="image_1">
+                </div>
+                <div class="col-4">
+                  <label>Image 2</label>
+                  <input type="file" class="form-control" name="image_2">      
+                </div>
+                <div class="col-4">
+                  <label>Image 3</label>
+                  <input type="file" class="form-control" name="image_3">      
+                </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Add
+            </button>
+          </div>
+      </div>
+    </div>
 </form>
+
+</div></div>
 @endsection

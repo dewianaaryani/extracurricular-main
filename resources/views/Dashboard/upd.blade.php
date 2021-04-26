@@ -1,15 +1,12 @@
 @extends('dashboard.layout')
 @section('title','UPD')
 @section('banner-title')
-    <div data-aos="zoom-in-up">
+	<div data-aos="zoom-in-up">
         <div class="banner-title">
-                <h3 class="font-weight-medium">Contact
+                <h3 class="font-weight-medium" style="padding-top: 60px;">About
             </h3>
         </div>
-        <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-
-            <br>
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+        <p class="mt-3" style="padding-right: 80px;">{{$content -> about_desc}}
         </p>        
     </div>    
 @endsection

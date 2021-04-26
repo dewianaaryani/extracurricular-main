@@ -19,7 +19,7 @@
                 @endif
 <div class="row">
   <div class="col-12">
-<form method="post" action="{{route('pjr.store')}}" enctype="multipart/form-data" class="">
+<form method="post" action="{{route('pjr.store')}}"    class="">
 @csrf
     <div class="card card-primary">      
       <div class="card-header"><h4>Add Data</h4></div>
