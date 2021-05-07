@@ -41,7 +41,7 @@ class GurusenbudController extends Controller
             'role' => "Guru Senbud",    
             'senbud_id' => $dataRequest['senbud_id'],            
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::create($data);
         return redirect()->route('gurusenbud.index')
@@ -66,7 +66,7 @@ class GurusenbudController extends Controller
             'role' => "Guru Senbud",    
             'senbud_id' => $dataRequest['senbud_id'],            
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
         return redirect()->route('gurusenbud.index')

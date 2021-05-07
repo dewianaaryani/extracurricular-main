@@ -87,9 +87,9 @@
                 <a href="{{route('admin.form.content')}}" class="nav-link" data-toggle=""><i class="fas fa-users"></i> <span>Content</span></a>                
                </li>
                <li class="nav-item dropdown">
-                <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Absen</span></a>
+                <a href="{{route('absen.index')}}" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Absen</span></a>
                 <ul class="dropdown-menu">                  
-                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Detail</span></a></li>                                    
+                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Guru Senbud & UPD</span></a></li>                                    
                 </ul>
                </li>
               </li>

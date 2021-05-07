@@ -21,14 +21,32 @@ class AbsenController extends Controller
 
     public function index()
     {   
-        $ekskul = Ekskul::all();
-        $user = User::all();
-
-        if($user)
+        $user = Auth::user();        
+        // $pembimbing = User::all();
+        // if ( $user->role == "Instruktur UPD") {
+        //     $ekskul_id = $user->upd_id;
+        //     // dd($user);  
+        // }else if ($user->role == "Guru Senbud") {
+        //     $ekskul_id = $user->senbud_id;
+        // }else{
+        //     $ekskul_id = $user->updprod_id;
+        // }
+        $absenUser = Absen::query()
+            ->join('ekskul', 'ekskul.id', '=', 'absen.eskul_id' )
+            ->join('users', 'users.id', '=', 'absen.user_id' )
+            ->select(   
+                'absen.user_id as users_id',
+                'absen.eskul_id as ekskul_id',
+                'ekskul.name as ekskul_name',
+                'users.name as user_name',
+                'absen.date',
+            )
+            ->where('absen.user_id','=',$user->id)
+            ->paginate(5);
+            
         
-        // $absen = Absen::latest()->paginate(5);
-        // return view('Admin.absen.index',compact('absen'))
-        //     ->with('i', (request()->input('page', 1) -1)*5);
+        return view('Admin.absen.index',compact('absenUser'))
+            ->with('i', (request()->input('page', 1) -1)*5);
     }
     public function create()
     {
@@ -43,30 +61,25 @@ class AbsenController extends Controller
             
         ]);
         $dataRequest = $request->all();
-        $user = Auth::user();
+        $user = Auth::user(); 
+        // dd($user);
+        if ( $user->role == "Instruktur UPD") {
+            $ekskul_id = $user->upd_id;
+            // dd($user);  
+        }else if ($user->role == "Guru Senbud") {
+            $ekskul_id = $user->senbud_id;
+        }else{
+            $ekskul_id = $user->updprod_id;
+        }
+             
         $data = [
             'date' => $dataRequest['date'],
-            'eskul_id' => $user->eksul_id
-        ];
+            'user_id' => $user->id,
+            'eskul_id' => $ekskul_id,
+        ];                
+        $absen = Absen::create($data);
         
-        if(!empty($dataRequest['image_1'])){
-            $imageName = date('ymdhis').'_image_1.'.$request->image_1->extension();
-            $request->image_1->move(public_path('images/upd'), $imageName);
-            $data['image_1'] = $imageName;
-        }
-        if(!empty($dataRequest['image_2'])){
-            $imageName = date('ymdhis').'_image_2.'.$request->image_2->extension();  
-            $request->image_2->move(public_path('images/upd'), $imageName);
-            $data['image_2'] = $imageName;
-        }
-        if(!empty($dataRequest['image_3'])){
-            $imageName = date('ymdhis').'_image_3.'.$request->image_3->extension();  
-            $request->image_3->move(public_path('images/upd'), $imageName);
-            $data['image_3'] = $imageName;
-        }
-        Ekskul::create($data);
-        
-        return redirect()->route('upd.index')
+        return redirect(route('absen.index', $absen->id))
             ->with('success', 'Success Added Data');
 
     }
@@ -116,5 +129,9 @@ class AbsenController extends Controller
         Ekskul::find($id)->delete();
         return redirect()->route('upd.index')
             ->with('success', 'Success Delete Data');
+    }
+    public function show($id)
+    {
+        
     }
 }

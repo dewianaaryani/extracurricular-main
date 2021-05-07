@@ -40,7 +40,7 @@ class PJRayonController extends Controller
             'role' => "Pembimbing Rayon",
             'rayon_id' => $dataRequest['rayon_id'],            
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::create($data);
         return redirect()->route('pjr.index')
@@ -68,7 +68,7 @@ class PJRayonController extends Controller
             'role' => "Pembimbing Rayon",
             'rayon_id' => $dataRequest['rayon_id'],            
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
         return redirect()->route('pjr.index')

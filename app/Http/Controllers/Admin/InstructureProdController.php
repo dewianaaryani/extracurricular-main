@@ -40,7 +40,7 @@ class InstructureProdController extends Controller
             'role' => "Instruktur UPD Prod",    
             'updprod_id' => $dataRequest['updprod_id'],            
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::create($data);
         return redirect()->route('instrukturprod.index')
@@ -68,7 +68,7 @@ class InstructureProdController extends Controller
             'role' => "Instruktur UPD Prod",
             'updprod_id' => $dataRequest['updprod_id'],
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
         return redirect()->route('instrukturprod.index')

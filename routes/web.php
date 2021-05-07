@@ -29,10 +29,10 @@ use App\Http\Controllers\PageController;
 |
 */
 Route::get('/', [PageController::class, 'landing']);
-Route::get('upd', [PageController::class, 'upd']);
+// Route::get('upd', [PageController::class, 'upd']);
 Route::get('about', [PageController::class, 'about']);
 
-Route::get('upd', [PageController::class, 'upd']);
+
 
 Route::get('contact', function () {
     return view('dashboard.kontak');
@@ -68,6 +68,15 @@ Route::prefix('admin')->group(function () {
             Route::resource('rombel', AdminRombel::class);
             Route::resource('rayon', AdminRayon::class);        
             Route::resource('absen', AdminAbsen::class);        
+        });        
+        Route::group(['middleware' => ['cek_login:Instruktur UPD']], function(){
+            Route::resource('siswa', AdminSiswa::class);
+            Route::resource('upd', AdminUpd::class);                        
+            Route::resource('user', AdminUser::class);
+            Route::resource('rombel', AdminRombel::class);
+            Route::resource('rayon', AdminRayon::class);        
+            Route::resource('absen', AdminAbsen::class);       
+            Route::resource('instruktur', AdminInstruktur::class); 
         });        
         Route::get('/', function () {
             return view('admin.layout.dashboard');

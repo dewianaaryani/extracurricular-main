@@ -27,25 +27,16 @@
                             
                             
                             <th>Action</th>
+                        
                         </tr>
-                        @foreach($absen as $absen)    
-                        <tr>
-                            <td>{{ ++ $i }}</td>
-                            <td>{{ $pjr -> name}}</td>
-                            <td>{{ $pjr -> nomor_induk}}</td>
-                            <td>{{ $pjr -> rayon_name}}</td>
-                                                       
-                            <td>
-                                <form action="{{route('pjr.destroy', $pjr->id)}}" method="post">
-                                    <a href="{{route('pjr.edit', $pjr->id)}}" type="button" class="btn btn-primary">Update</a>
-                                    
-                                    @csrf
-                                    @method('DELETE')               
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>   
-                        @endforeach                     
+                        @foreach($absenUser as $a)
+                            <tr>
+                                <td> {{ ++ $i }} </td>
+                                <td> {{ $a -> date }} </td>
+                                <td> {{ $a -> ekskul_name }} </td>
+                                <td> {{ $a -> user_name }} </td>
+                            </tr>
+                        @endforeach
                         </table>
                     </div>
                     </div>

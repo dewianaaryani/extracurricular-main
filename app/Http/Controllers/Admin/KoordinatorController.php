@@ -28,7 +28,7 @@ class KoordinatorController extends Controller
             'nomor_induk' => $dataRequest['nomor_induk'],
             'role' => "Koordinator Senbud & UPD",    
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::create($data);
         return redirect()->route('koordinator.index')
@@ -50,7 +50,7 @@ class KoordinatorController extends Controller
             'nomor_induk' => $dataRequest['nomor_induk'],
             'role' => "Koordinator Senbud & UPD",                   
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
         return redirect()->route('koordinator.index')

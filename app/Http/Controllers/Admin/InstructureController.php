@@ -40,8 +40,9 @@ class InstructureController extends Controller
             'role' => "Instruktur UPD",    
             'upd_id' => $dataRequest['upd_id'],            
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
+        
         User::create($data);
         return redirect()->route('instruktur.index')
             ->with('success','Successed add data');
@@ -68,7 +69,7 @@ class InstructureController extends Controller
             'role' => "Instruktur UPD",
             'upd_id' => $dataRequest['upd_id'],
             'username' => $dataRequest['username'],
-            'password' => $dataRequest['password'],
+            'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
         return redirect()->route('instruktur.index')

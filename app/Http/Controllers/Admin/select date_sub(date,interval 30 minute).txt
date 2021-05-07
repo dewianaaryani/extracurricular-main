@@ -1,0 +1,12 @@
+select 
+    absen.id,
+    absen_detail.id as absen_detail_id,
+    date_sub(date,interval 30 minute) AS min_waktu_pengabsenan, 
+    date, 
+    date_sub(date,interval - 30 minute) AS max_waktu_pengabsenan, 
+    NOW() as waktu_sekarang 
+FROM absen 
+    INNER JOIN 
+    absen_detail ON absen_detail.absen_id = absen.id
+    WHERE absen_detail.user_id = 3 AND absen_detail.status = 0
+    having  NOW() BETWEEN min_waktu_pengabsenan AND max_waktu_pengabsenan

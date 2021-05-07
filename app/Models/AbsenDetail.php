@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-// use App\Models\User;
 
 class Absen extends Model
 {
-    protected $table = 'absen';
+    protected $table = 'absen_detail';
     protected $guarded = array('id');
 }
     
