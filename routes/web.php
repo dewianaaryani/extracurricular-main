@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\UpdprodController as AdminUpdprod;
 use App\Http\Controllers\Admin\ContentController as AdminContent;
 use App\Http\Controllers\Admin\LoginController as AdminLogin;
 use App\Http\Controllers\Admin\AbsenController as AdminAbsen;
+use App\Http\Controllers\Admin\AbsenDetailsController as AdminAbsenDet;
 use App\Http\Controllers\PageController;
 
 /*
@@ -53,12 +54,12 @@ Route::prefix('admin')->group(function () {
             Route::resource('siswa', AdminSiswa::class);
         });        
         Route::group(['middleware' => ['cek_login:Koordinator Senbud & UPD']], function(){
-            Route::resource('siswa', AdminSiswa::class);
             Route::resource('upd', AdminUpd::class);
             Route::resource('gurusenbud', AdminGS::class);
+            Route::resource('student', AdminSiswa::class);
             Route::resource('senbud', AdminSenbud::class);
             Route::resource('updprod', AdminUpdprod::class);
-            Route::resource('instruktur', AdminInstruktur::class);
+            Route::resource('instruktur', AdminInstruktur::class); 
             Route::resource('instrukturprod', AdminInstrukturProd::class);            
             Route::resource('pjr', AdminPJR::class);
             Route::resource('koordinator', AdminKoordinator::class);
@@ -67,16 +68,14 @@ Route::prefix('admin')->group(function () {
             Route::resource('user', AdminUser::class);
             Route::resource('rombel', AdminRombel::class);
             Route::resource('rayon', AdminRayon::class);        
-            Route::resource('absen', AdminAbsen::class);        
         });        
-        Route::group(['middleware' => ['cek_login:Instruktur UPD']], function(){
-            Route::resource('siswa', AdminSiswa::class);
-            Route::resource('upd', AdminUpd::class);                        
-            Route::resource('user', AdminUser::class);
-            Route::resource('rombel', AdminRombel::class);
-            Route::resource('rayon', AdminRayon::class);        
-            Route::resource('absen', AdminAbsen::class);       
-            Route::resource('instruktur', AdminInstruktur::class); 
+        Route::group(['middleware' => ['cek_login:Instruktur UPD Prod||Instruktur UPD||Guru Senbud']], function(){
+            Route::get('/absenDet/approveAbsen/{id}', [AdminAbsenDet::class, 'approveAbsen'])->name('absenDet.approveAbsen');            
+            Route::get('/absenDet/approveIzin/{id}', [AdminAbsenDet::class, 'approveIzin'])->name('absenDet.approveIzin');            
+            Route::get('/absenDet/noApprove/{id}', [AdminAbsenDet::class, 'noApprove'])->name('absenDet.noApprove'); 
+            Route::post('/absenDet/postNoApprove/{id}', [AdminAbsenDet::class, 'postNoApprove'])->name('absenDet.postNoApprove');            
+            Route::resource('absen', AdminAbsen::class);            
+            Route::resource('siswa', AdminSiswa::class);                   
         });        
         Route::get('/', function () {
             return view('admin.layout.dashboard');

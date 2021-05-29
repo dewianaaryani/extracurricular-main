@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absen;
+use App\Models\AbsenDetail;
 use App\Models\User;
 use App\Models\Ekskul;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,7 @@ class AbsenController extends Controller
             ->join('ekskul', 'ekskul.id', '=', 'absen.eskul_id' )
             ->join('users', 'users.id', '=', 'absen.user_id' )
             ->select(   
+                'absen.id as id', 
                 'absen.user_id as users_id',
                 'absen.eskul_id as ekskul_id',
                 'ekskul.name as ekskul_name',
@@ -45,9 +47,28 @@ class AbsenController extends Controller
             ->paginate(5);
             
         
-        return view('Admin.absen.index',compact('absenUser'))
+            return view('Admin.absen.index',compact('absenUser'))
             ->with('i', (request()->input('page', 1) -1)*5);
-    }
+        }
+    public function show($id)
+        {
+            $absen =  Absen::find($id);
+            $absenDet = AbsenDetail::query()
+            ->join('absen', 'absen.id', '=', 'absen_detail.absen_id') 
+            ->join('users', 'users.id', '=', 'absen_detail.user_id') 
+            ->select(
+                'absen_detail.id as id',
+                'absen_detail.absen_id as absen_id',
+                'absen_detail.user_id as user_id',            
+                'users.name as student_name',
+                'absen_detail.status as status',            
+            )            
+            ->where( 'absen_detail.absen_id','=',$absen->id)
+            ->paginate(5);
+            // dd($absenDet);
+            return view('Admin.absen.show', compact('absenDet'))
+            ->with('i', (request()->input('page', 1) -1)*5);
+        }
     public function create()
     {
         return view('Admin.absen.create');
@@ -68,8 +89,11 @@ class AbsenController extends Controller
             // dd($user);  
         }else if ($user->role == "Guru Senbud") {
             $ekskul_id = $user->senbud_id;
-        }else{
+        }else if($user->role == "Instruktur UPD Prod"){
             $ekskul_id = $user->updprod_id;
+        }else{
+            // $message = "kamu tidak mempunyai ekskul id";
+            return false;
         }
              
         $data = [
@@ -86,52 +110,42 @@ class AbsenController extends Controller
 
     public function edit($id)
     {
-        $upd = Ekskul::find($id);
-        return view('Admin.upd.update', compact('upd'));
+        $absen = Absen::find($id);
+        // $date = $absen->date->date_format('m/d/Y');
+        // dd($absen);
+        return view('Admin.absen.update', compact('absen'));
     }
     public function update(Request $request,$id)
     {
         $request->validate([
-            'name' => 'required',
+            'date'=>'required',
+            
         ]);
         $dataRequest = $request->all();
+        $user = Auth::user(); 
+        // dd($user);
+        if ( $user->role == "Instruktur UPD") {
+            $ekskul_id = $user->upd_id;
+            // dd($user);  
+        }else if ($user->role == "Guru Senbud") {
+            $ekskul_id = $user->senbud_id;
+        }else{
+            $ekskul_id = $user->updprod_id;
+        }
+             
         $data = [
-        
-            'name' => $dataRequest['name'],
-            'tempat' => $dataRequest['tempat'],
-            'type' => "Upd",
-            'description' => $dataRequest['description'],
-            'hari' => $dataRequest['hari'],
-            'jam' => $dataRequest['jam'],    
-        
-        ];
-        if(!empty($dataRequest['image_1'])){
-            $imageName = date('ymdhis').'_image_1.'.$request->image_1->extension();
-            $request->image_1->move(public_path('images/upd'), $imageName);
-            $data['image_1'] = $imageName;
-        }
-        if(!empty($dataRequest['image_2'])){
-            $imageName = date('ymdhis').'_image_2.'.$request->image_2->extension();  
-            $request->image_2->move(public_path('images/upd'), $imageName);
-            $data['image_2'] = $imageName;
-        }
-        if(!empty($dataRequest['image_3'])){
-            $imageName = date('ymdhis').'_image_3.'.$request->image_3->extension();  
-            $request->image_3->move(public_path('images/upd'), $imageName);
-            $data['image_3'] = $imageName;
-        }
-        Ekskul::find($id)->update($data);
-        return redirect()->route('upd.index')
+            'date' => $dataRequest['date'],
+            'user_id' => $user->id,
+            'eskul_id' => $ekskul_id,
+        ];                        
+        Absen::find($id)->update($data);
+        return redirect()->route('absen.index')
             ->with('success','Success Update Data');
     }
     public function destroy($id)
     {
-        Ekskul::find($id)->delete();
-        return redirect()->route('upd.index')
+        Absen::find($id)->delete();
+        return redirect()->route('absen.index')
             ->with('success', 'Success Delete Data');
-    }
-    public function show($id)
-    {
-        
     }
 }

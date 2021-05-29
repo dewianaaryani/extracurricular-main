@@ -80,7 +80,7 @@ class SiswaController extends Controller
             'password' => bcrypt($dataRequest['password']),
         ];
         User::create($data);
-        return redirect()->route('siswa.index')
+        return redirect()->route('student.index')
             ->with('success','Successed add data');
     }
 
@@ -117,13 +117,13 @@ class SiswaController extends Controller
             'password' => bcrypt($dataRequest['password']),
         ];
         User::find($id)->update($data);
-        return redirect()->route('siswa.index')
+        return redirect()->route('student.index')
             ->with('success','successed update');
     }
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('siswa.index')
+        return redirect()->route('student.index')
             ->with('success', 'Success Delete Data');
     }
 

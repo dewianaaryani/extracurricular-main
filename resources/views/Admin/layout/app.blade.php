@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <title>@yield('title') &mdash; SIM UPD & SENBUD</title>
-
+  <meta name="author" content="email : aryanidewianarahmat@gmail.com">
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/bs.min.css')}}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- CSS Libraries -->
@@ -73,7 +73,7 @@
                   <li><a class="nav-link" href="{{route('instruktur.index')}}"><i class="fas fa-user"></i> <span>Instruktur UPD</span></a></li>
                   <li><a class="nav-link" href="{{route('instrukturprod.index')}}"><i class="fas fa-user"></i> <span>Instruktur PROD</span></a></li>
                   <li><a class="nav-link" href="{{route('pjr.index')}}"><i class="fas fa-user"></i> <span>Pembimbing Rayon</span></a></li>
-                  <li><a class="nav-link" href="{{route('siswa.index')}}"><i class="fas fa-user"></i> <span>Siswa</span></a></li>    
+                  <li><a class="nav-link" href="{{route('student.index')}}"><i class="fas fa-user"></i> <span>Siswa</span></a></li>    
                 </ul>
                <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>SENBUD & UPD</span></a>
@@ -89,7 +89,8 @@
                <li class="nav-item dropdown">
                 <a href="{{route('absen.index')}}" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Absen</span></a>
                 <ul class="dropdown-menu">                  
-                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Guru Senbud & UPD</span></a></li>                                    
+                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Guru Senbud & UPD</span></a></li>    
+                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Siswa</span></a></li>                                    
                 </ul>
                </li>
               </li>
@@ -132,12 +133,13 @@
   <script src="{{asset('admin_assets/js/stisla.js')}}"></script>
 
   <!-- JS Libraies -->
-
+  <script src="{{asset('/node_modules/prismjs/prism.js')}}"></script>
   <!-- Template JS File -->
   
   <script src="{{asset('admin_assets/js/scripts.js')}}"></script>
   <script src="{{asset('admin_assets/js/custom.js')}}"></script>
 
   <!-- Page Specific JS File -->
+  <script src="{{asset('admin_assets/js/page/bootstrap-modal.js')}}"></script>
 </body>
 </html>

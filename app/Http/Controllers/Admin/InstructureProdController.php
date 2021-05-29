@@ -54,7 +54,6 @@ class InstructureProdController extends Controller
     }
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'name'=>'required',            
             'updprod_id'=>'required',        
@@ -74,15 +73,10 @@ class InstructureProdController extends Controller
         return redirect()->route('instrukturprod.index')
             ->with('success','successed update');
     }
-
-
-
-
     public function destroy($id)
     {
         User::find($id)->delete();
         return redirect()->route('instrukturprod.index')
             ->with('success', 'Success Delete Data');
     }
-
 }

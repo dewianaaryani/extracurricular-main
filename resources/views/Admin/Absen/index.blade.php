@@ -6,6 +6,11 @@
                 <div class="breadcrumb-item">Absen</div>
 @endsection
 @section('content')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success" role="alert">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 <div class="row">            
                 <div class="col-12">
                 <div class="card">
@@ -23,9 +28,7 @@
                             <th>#</th>
                             <th>Tanggal</th>
                             <th>Eskul</th>
-                            <th>Pembimbing</th>
-                            
-                            
+                            <th>Pembimbing</th>                                                        
                             <th>Action</th>
                         
                         </tr>
@@ -35,6 +38,15 @@
                                 <td> {{ $a -> date }} </td>
                                 <td> {{ $a -> ekskul_name }} </td>
                                 <td> {{ $a -> user_name }} </td>
+                                <td>
+                                    <form action="{{route('absen.destroy', $a->id)}}" method="post">
+                                        <a href="{{route('absen.edit', $a->id)}}" type="button" class="btn btn-primary">Update</a>                                        
+                                        <a href="{{route('absen.show', $a->id)}}" type="button" class="btn btn-primary">Show</a>                                        
+                                        @csrf
+                                        @method('DELETE')               
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </table>

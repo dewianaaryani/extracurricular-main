@@ -35,14 +35,13 @@ class LoginController extends Controller
                 $user = Auth::user();
                 //dd($user);
                 if ($user->role == 'Siswa') {
-                    return redirect()->intended('admin/siswa');
+                    return redirect()->intended('admin');
                 }elseif($user->role == 'Koordinator Senbud & UPD'){
                     return redirect()->intended('admin/koordinator');
                 }elseif($user->role == 'Instruktur UPD'){
                     return redirect()->intended('admin/absen');                
-                }
-                elseif($user->role == 'Instruktur UPD Pord'){
-                    return redirect()->intended('admin/');                
+                }elseif($user->role == 'Instruktur UPD Prod'){
+                    return redirect()->intended('admin/absen');                
                 }
                 elseif($user->role == 'Guru Senbud'){
                     return redirect()->intended('admin/');                

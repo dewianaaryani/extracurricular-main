@@ -43,31 +43,31 @@ $("#modal-4").fireModal({
 });
 
 $("#modal-5").fireModal({
-  title: 'Login',
+  title: 'Alasan Tidak Terapprove',
   body: $("#modal-login-part"),
   footerClass: 'bg-whitesmoke',
   autoFocus: false,
-  onFormSubmit: function(modal, e, form) {
-    // Form Data
-    let form_data = $(e.target).serialize();
-    console.log(form_data)
+  // onFormSubmit: function(modal, e, form) {
+  //   // Form Data
+  //   let form_data = $(e.target).serialize();
+  //   console.log(form_data)
 
-    // DO AJAX HERE
-    let fake_ajax = setTimeout(function() {
-      form.stopProgress();
-      modal.find('.modal-body').prepend('<div class="alert alert-info">Please check your browser console</div>')
+  //   // DO AJAX HERE
+  //   let fake_ajax = setTimeout(function() {
+  //     form.stopProgress();
+  //     modal.find('.modal-body').prepend('<div class="alert alert-info">Please check your browser console</div>')
 
-      clearInterval(fake_ajax);
-    }, 1500);
+  //     clearInterval(fake_ajax);
+  //   }, 1500);
 
-    e.preventDefault();
-  },
-  shown: function(modal, form) {
-    console.log(form)
-  },
+  //   e.preventDefault();
+  // },
+  // shown: function(modal, form) {
+  //   console.log(form)
+  // },
   buttons: [
     {
-      text: 'Login',
+      text: 'Submit',
       submit: true,
       class: 'btn btn-primary btn-shadow',
       handler: function(modal) {

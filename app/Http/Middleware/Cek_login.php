@@ -15,13 +15,26 @@ class Cek_login
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next,$role)
+    public function handle(Request $request, Closure $next,$roles)
     {
         if(!Auth::check()){
             return redirect('admin/login');
         }
         $user = Auth::user();
-        if($user->role == $role){
+        //$explodeRole string to array 
+        $explodeRole = explode("||",$roles);
+        // dd([$explodeRole,$user->role,array_search($user->role."",$explodeRole)]);
+        $validateRole = true;
+        // foreach($explodeRole as $role){
+        //     if($user->role == $role){
+        //         $validateRole = true;
+        //         break;
+        //     }
+        // }
+        if(array_search($user->role,$explodeRole) === false){
+            $validateRole = false;
+        }
+        if($validateRole === true){
             return $next($request);
         }
 
