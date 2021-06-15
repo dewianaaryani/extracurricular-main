@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Rayon;
-
+use app\Models\Absen;
+use app\Models\AbsenDetail;
 class PJRayonController extends Controller
 {
     public function index()
@@ -81,5 +82,9 @@ class PJRayonController extends Controller
         User::find($id)->delete();
         return redirect()->route('pjr.index')
             ->with('success', 'Success Delete Data');
+    }
+    public function showAbsensi($id)
+    {
+
     }
 }

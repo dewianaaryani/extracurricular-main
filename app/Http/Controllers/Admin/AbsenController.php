@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Ekskul;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use DataTables;
 class AbsenController extends Controller
 {
     /**
@@ -50,8 +50,8 @@ class AbsenController extends Controller
             return view('Admin.absen.index',compact('absenUser'))
             ->with('i', (request()->input('page', 1) -1)*5);
         }
-    public function show($id)
-        {
+    public function show(Request $request, $id)
+    {
             $absen =  Absen::find($id);
             $absenDet = AbsenDetail::query()
             ->join('absen', 'absen.id', '=', 'absen_detail.absen_id') 
@@ -62,11 +62,45 @@ class AbsenController extends Controller
                 'absen_detail.user_id as user_id',            
                 'users.name as student_name',
                 'absen_detail.status as status',            
-            )            
-            ->where( 'absen_detail.absen_id','=',$absen->id)
-            ->paginate(5);
+                )
+                ->where( 'absen_detail.absen_id','=',$absen->id)->paginate(5);
+                
+            // if ($request->ajax()) {
+            //     $data = $absenDet;
+            //     return Datatables::of($data)
+            //             ->addIndexColumn()
+            //             ->addColumn('status', function($row){
+            //                 if($row->status == "1"){
+            //                     return '<span class="badge badge-primary">1</span>';
+            //                 }elseif($row->status == "2"){
+            //                    return '<span class="badge badge-danger">2</span>';
+            //                 }else{
+            //                     return '<span class="badge badge-danger">3</span>';
+            //                  }                            
+            //             })
+            //             ->filter(function($instance) use ($request){
+            //                 if($request->get('status') == '0'){
+            //                     $instance->where('status', $request->get('status'));
+            //                 }elseif( $request->get('status') == '1'){
+            //                     $instance->where('status', $request->get('status'));
+            //                 }elseif( $request->get('status') == '2'){
+            //                     $instance->where('status', $request->get('status'));
+            //                 }                            
+            //                 if (!empty($request->get('search'))) {
+            //                     $instance->where(function($w) use ($request){
+            //                         $search = $request->get('search');
+            //                         $w->orWhere('users.name', 'LIKE', "%$search%")
+            //                             ->orWhere('absen_detail.id', 'LIKE', "%$search%");
+            //                     });
+            //                 }
+            //             })
+            //             ->rawColumns(['status'])
+            //             ->make(true);                        
+            // }
+
+            // ->paginate(5);
             // dd($absenDet);
-            return view('Admin.absen.show', compact('absenDet'))
+            return view('Admin.absen.show', compact('absenDet','absen'))
             ->with('i', (request()->input('page', 1) -1)*5);
         }
     public function create()

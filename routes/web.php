@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ContentController as AdminContent;
 use App\Http\Controllers\Admin\LoginController as AdminLogin;
 use App\Http\Controllers\Admin\AbsenController as AdminAbsen;
 use App\Http\Controllers\Admin\AbsenDetailsController as AdminAbsenDet;
+use App\Http\Controllers\Admin\AbsenSiswaController as AdminAbsenSiswa;
 use App\Http\Controllers\PageController;
 
 /*
@@ -51,9 +52,14 @@ Route::prefix('admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         
         Route::group(['middleware' => ['cek_login:Siswa']], function(){
-            Route::resource('siswa', AdminSiswa::class);
+            Route::resource('absenSiswa', AdminAbsenSiswa::class);      
+            Route::get('/absenSiswa/present/{id}', [AdminabsenSiswa::class, 'present'])->name('absenSiswa.present'); 
+            Route::get('/absenSiswa/izin/{id}', [AdminabsenSiswa::class, 'izin'])->name('absenSiswa.izin'); 
+            Route::post('/absenSiswa/postIzin/{id}', [AdminabsenSiswa::class, 'postIzin'])->name('absenSiswa.postIzin');            
+      
         });        
         Route::group(['middleware' => ['cek_login:Koordinator Senbud & UPD']], function(){
+            Route::resource('siswa', AdminSiswa::class);
             Route::resource('upd', AdminUpd::class);
             Route::resource('gurusenbud', AdminGS::class);
             Route::resource('student', AdminSiswa::class);
@@ -74,14 +80,14 @@ Route::prefix('admin')->group(function () {
             Route::get('/absenDet/approveIzin/{id}', [AdminAbsenDet::class, 'approveIzin'])->name('absenDet.approveIzin');            
             Route::get('/absenDet/noApprove/{id}', [AdminAbsenDet::class, 'noApprove'])->name('absenDet.noApprove'); 
             Route::post('/absenDet/postNoApprove/{id}', [AdminAbsenDet::class, 'postNoApprove'])->name('absenDet.postNoApprove');            
-            Route::resource('absen', AdminAbsen::class);            
-            Route::resource('siswa', AdminSiswa::class);                   
+            Route::resource('absen', AdminAbsen::class);         
+                        
         });        
         Route::get('/', function () {
             return view('admin.layout.dashboard');
         });            
         
-        
+         
     });
     
     Route::get('logout', [AdminLogin::class, 'logout'])->name('logout');

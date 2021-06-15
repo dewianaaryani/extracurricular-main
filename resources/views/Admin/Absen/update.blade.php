@@ -28,7 +28,7 @@
           <div class="row">
             <div class="form-group col-8">
               <label for="name">Date</label>
-              <input id="date" type="date" class="form-control" name="date" value="{{$absen->date}}" autofocus>
+              <input id="date" type="datetime-local" class="form-control" name="date" value="{{ date('Y-m-d\TH:i', strtotime($absen->date)) }}" autofocus>
             </div>        
           </div>                          
           <div class="form-group">

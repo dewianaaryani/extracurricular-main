@@ -11,7 +11,10 @@
 
   <!-- CSS Libraries -->
   <!-- Template CSS -->
-  
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  @yield(
+    'headScript'
+  )
   <link rel="stylesheet" href="{{asset('admin_assets/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('admin_assets/css/components.css')}}">
 
@@ -31,7 +34,7 @@
         <ul class="navbar-nav navbar-right">          
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="{{asset('admin_assets/img/avatar/avatar-1.png')}}" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+            <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
               <a href="features-profile.html" class="dropdown-item has-icon">
@@ -90,7 +93,7 @@
                 <a href="{{route('absen.index')}}" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Absen</span></a>
                 <ul class="dropdown-menu">                  
                   <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Guru Senbud & UPD</span></a></li>    
-                  <li><a class="nav-link" href="{{route('absen.index')}}"><i class="fas fa-drum"></i> <span>Absen Siswa</span></a></li>                                    
+                  <li><a class="nav-link" href="{{route('absenSiswa.index')}}"><i class="fas fa-drum"></i> <span>Absen Siswa</span></a></li>                                    
                 </ul>
                </li>
               </li>
@@ -141,5 +144,18 @@
 
   <!-- Page Specific JS File -->
   <script src="{{asset('admin_assets/js/page/bootstrap-modal.js')}}"></script>
+  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script>
+      $(document).ready( function () {
+        $('#myTable').DataTable();
+      } );
+  </script>
+  @yield(
+    'bodyScript'
+  )
 </body>
+
+@yield(
+    'afterBodyScript'
+  )
 </html>
