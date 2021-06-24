@@ -52,6 +52,7 @@ class AbsenController extends Controller
         }
     public function show(Request $request, $id)
     {
+        $user = Auth::user();     
             $absen =  Absen::find($id);
             $absenDet = AbsenDetail::query()
             ->join('absen', 'absen.id', '=', 'absen_detail.absen_id') 
@@ -63,7 +64,7 @@ class AbsenController extends Controller
                 'users.name as student_name',
                 'absen_detail.status as status',            
                 )
-                ->where( 'absen_detail.absen_id','=',$absen->id)->paginate(5);
+            ->where( 'absen_detail.absen_id','=',$absen->id)->paginate(5);
                 
             // if ($request->ajax()) {
             //     $data = $absenDet;

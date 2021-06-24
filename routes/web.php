@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\LoginController as AdminLogin;
 use App\Http\Controllers\Admin\AbsenController as AdminAbsen;
 use App\Http\Controllers\Admin\AbsenDetailsController as AdminAbsenDet;
 use App\Http\Controllers\Admin\AbsenSiswaController as AdminAbsenSiswa;
+use App\Http\Controllers\Admin\ScoresController as AdminScores;
+use App\Http\Controllers\Admin\DailyScoreController as AdminDailyScore;
 use App\Http\Controllers\PageController;
 
 /*
@@ -58,6 +60,13 @@ Route::prefix('admin')->group(function () {
             Route::post('/absenSiswa/postIzin/{id}', [AdminabsenSiswa::class, 'postIzin'])->name('absenSiswa.postIzin');            
       
         });        
+        Route::group(['middleware' => ['cek_login:Pembimbing Rayon']], function(){
+            Route::get('pjr/dashboard', [AdminPJR::class, 'pjrDashboard']);
+            Route::get('/', [AdminPJR::class, 'pjrDashboard']);
+            Route::get('pjr/showUpdRayon', [AdminPJR::class, 'showUpdRayon'])->name('pjr.showUpdRayon');
+            Route::get('pjr/showUpdProdRayon', [AdminPJR::class, 'showUpdProdRayon'])->name('pjr.showUpdProdRayon');
+            Route::get('pjr/showSenbudRayon', [AdminPJR::class, 'showSenbudRayon'])->name('pjr.showSenbudRayon');
+        });
         Route::group(['middleware' => ['cek_login:Koordinator Senbud & UPD']], function(){
             Route::resource('siswa', AdminSiswa::class);
             Route::resource('upd', AdminUpd::class);
@@ -80,12 +89,15 @@ Route::prefix('admin')->group(function () {
             Route::get('/absenDet/approveIzin/{id}', [AdminAbsenDet::class, 'approveIzin'])->name('absenDet.approveIzin');            
             Route::get('/absenDet/noApprove/{id}', [AdminAbsenDet::class, 'noApprove'])->name('absenDet.noApprove'); 
             Route::post('/absenDet/postNoApprove/{id}', [AdminAbsenDet::class, 'postNoApprove'])->name('absenDet.postNoApprove');            
-            Route::resource('absen', AdminAbsen::class);         
-                        
+            Route::resource('absen', AdminAbsen::class);                     
+            
+            Route::prefix('scores')->group(function () {
+                Route::resource('daily',AdminDailyScore::class );
+            });
         });        
-        Route::get('/', function () {
-            return view('admin.layout.dashboard');
-        });            
+        // Route::get('/', function () {
+        //     return view('admin.layout.dashboard');
+        // });            
         
          
     });

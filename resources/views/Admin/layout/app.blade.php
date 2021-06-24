@@ -63,11 +63,44 @@
             <a href="index.html">St</a>
           </div>
           <ul class="sidebar-menu">
-              <li class="menu-header">Dashboard</li>
+          
+          @if(Auth::user()->role == "Pembimbing Rayon")
+            <li class="menu-header">Dashboard</li>
               <li class="nav-item dropdown">
-                <a href="{{url('admin/')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>                
-              </li>
+                  <a href="{{url('admin/')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>                
+              </li> 
               <li class="menu-header">Menu</li>
+              <li class="nav-item dropdown">
+                <a href="{{route('absen.index')}}" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-check-square"></i> <span>Absen</span></a>
+                <ul class="dropdown-menu">                  
+                  <li><a class="nav-link" href="{{route('pjr.showUpdRayon')}}"><i class="fas fa-basketball-ball"></i> <span>Absen UPD</span></a></li>                    
+                  <li><a class="nav-link" href="{{route('pjr.showUpdProdRayon')}}"><i class="fas fa-tv"></i> <span>Absen UPD PROD</span></a></li>                    
+                  <li><a class="nav-link" href="{{route('pjr.showSenbudRayon')}}"><i class="fas fa-drum"></i> <span>Absen SENBUD</span></a></li>                    
+                </ul>
+              </li>
+          @elseif(Auth::user()->role == "Instruktur UPD")
+            <li class="menu-header">Dashboard</li>
+              <li class="nav-item dropdown">
+                  <a href="{{url('admin/instruktur/dashboard')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>                
+              </li> 
+              <li class="menu-header">Menu</li>
+              <li class="nav-item ">
+                  <a href="{{route('absen.index')}}" class="nav-link"><i class="fas fa-check-square"></i><span>Absen</span></a>                
+              </li>               
+              <li class="nav-item dropdown">
+                <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-star"></i> <span>Nilai</span></a>
+                <ul class="dropdown-menu">                  
+                  <li><a class="nav-link" href="{{route('daily.index')}}"><i class="fas fa-drum"></i> <span>SENBUD</span></a></li>
+                  <li><a class="nav-link" href="{{route('upd.index')}}"><i class="fas fa-basketball-ball"></i> <span>UPD</span></a></li>                  
+                  <li><a class="nav-link" href="{{route('updprod.index')}}"><i class="fas fa-tv"></i> <span>UPD PROD</span></a></li>
+                </ul>
+               </li>
+              
+                        
+          @endif
+              
+              
+            <li class="menu-header">Menu</li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Users</span></a>
                 <ul class="dropdown-menu">
@@ -86,7 +119,7 @@
                   <li><a class="nav-link" href="{{route('updprod.index')}}"><i class="fas fa-tv"></i> <span>UPD PROD</span></a></li>
                 </ul>
                </li>
-               <li class="nav-item\">                  
+               <li class="nav-item">                  
                 <a href="{{route('admin.form.content')}}" class="nav-link" data-toggle=""><i class="fas fa-users"></i> <span>Content</span></a>                
                </li>
                <li class="nav-item dropdown">
@@ -96,7 +129,7 @@
                   <li><a class="nav-link" href="{{route('absenSiswa.index')}}"><i class="fas fa-drum"></i> <span>Absen Siswa</span></a></li>                                    
                 </ul>
                </li>
-              </li>
+            </li>
         </aside>
       </div>
 
@@ -147,7 +180,18 @@
   <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   <script>
       $(document).ready( function () {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+          "paging":   false,
+          
+          "info":     false,
+          
+        });        
+        var table = $('#myTable').DataTable();
+ 
+      // #myInput is a <input type="text"> element
+      $('#searchBar').on( 'keyup', function () {
+          table.search( this.value ).draw();
+} );
       } );
   </script>
   @yield(

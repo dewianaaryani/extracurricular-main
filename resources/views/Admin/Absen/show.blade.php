@@ -72,7 +72,7 @@
                                     <th>id</th>
                                     <th>Nama</th>
                                     <th>Status</th>                                                                                              
-                                    <th>Action</th>                            
+                                    <th colspan="2">Action</th>                            
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,7 +125,8 @@
                                             </form>
                                             <?php   }
                                             ?>     
-
+                                        </td>
+                                        <td>
                                             <?php if ($a->status == '2' ){ ?>
                                             <form action="" method="get">
                                                 <a href="{{route('absenDet.noApprove', $a->id)}}"  class="btn btn-danger"><i class="fa fa-times"></i></a>                                                                            
@@ -157,21 +158,7 @@
                 </div>                                                                                                                     
                 
                 <div class="card-footer text-right">
-                    <nav class="d-inline-block">
-                        <ul class="pagination mb-0">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                        </li>
-                        </ul>
-                    </nav>
+                {!! $absenDet->links() !!}
                 </div>
             </div>
         </div>
