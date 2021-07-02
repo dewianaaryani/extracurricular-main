@@ -78,6 +78,15 @@
                   <li><a class="nav-link" href="{{route('pjr.showSenbudRayon')}}"><i class="fas fa-drum"></i> <span>Absen SENBUD</span></a></li>                    
                 </ul>
               </li>
+              <li class="nav-item dropdown">
+                <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-star"></i> <span>Nilai</span></a>
+                <ul class="dropdown-menu">                  
+                  <li><a class="nav-link" href="{{route('pjr.showUpdRayon')}}"><i class="fas fa-calendar-day"></i> <span>Harian</span></a></li>                    
+                  <li><a class="nav-link" href="{{route('pjr.showUpdProdRayon')}}"><i class="fas fa-calendar-week"></i> <span>PTS</span></a></li>                    
+                  <li><a class="nav-link" href="{{route('pjr.showUpdProdRayon')}}"><i class="fas fa-calendar-week"></i> <span>PAS</span></a></li>                    
+                  <li><a class="nav-link" href="{{route('pjr.showUpdProdRayon')}}"><i class="fas fa-calendar-minus"></i> <span>UKK</span></a></li>                    
+                </ul>
+              </li>
           @elseif(Auth::user()->role == "Instruktur UPD")
             <li class="menu-header">Dashboard</li>
               <li class="nav-item dropdown">
@@ -90,13 +99,48 @@
               <li class="nav-item dropdown">
                 <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-star"></i> <span>Nilai</span></a>
                 <ul class="dropdown-menu">                  
-                  <li><a class="nav-link" href="{{route('daily.index')}}"><i class="fas fa-drum"></i> <span>SENBUD</span></a></li>
-                  <li><a class="nav-link" href="{{route('upd.index')}}"><i class="fas fa-basketball-ball"></i> <span>UPD</span></a></li>                  
-                  <li><a class="nav-link" href="{{route('updprod.index')}}"><i class="fas fa-tv"></i> <span>UPD PROD</span></a></li>
+                  <li><a class="nav-link" href="{{route('daily.index')}}"><i class="fas fa-drum"></i> <span>Harian</span></a></li>
+                  <li><a class="nav-link" href="{{route('pts.index')}}"><i class="fas fa-basketball-ball"></i> <span>PTS</span></a></li>                  
+                  <li><a class="nav-link" href="{{route('pas.index')}}"><i class="fas fa-tv"></i> <span>PAS</span></a></li>
+                  <li><a class="nav-link" href="{{route('ukk.index')}}"><i class="fas fa-tv"></i> <span>UKK</span></a></li>
                 </ul>
                </li>
-              
-                        
+          @elseif(Auth::user()->role == "Instruktur UPD Prod")
+              <li class="menu-header">Dashboard</li>
+                <li class="nav-item dropdown">
+                    <a href="{{url('admin/instruktur/dashboard')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>                
+                </li> 
+                <li class="menu-header">Menu</li>
+                <li class="nav-item ">
+                    <a href="{{route('absen.index')}}" class="nav-link"><i class="fas fa-check-square"></i><span>Absen</span></a>                
+                </li>               
+                <li class="nav-item dropdown">
+                  <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-star"></i> <span>Nilai</span></a>
+                  <ul class="dropdown-menu">                  
+                    <li><a class="nav-link" href="{{route('daily.index')}}"><i class="fas fa-drum"></i> <span>Harian</span></a></li>
+                    <li><a class="nav-link" href="{{route('pts.index')}}"><i class="fas fa-basketball-ball"></i> <span>PTS</span></a></li>                  
+                    <li><a class="nav-link" href="{{route('pas.index')}}"><i class="fas fa-tv"></i> <span>PAS</span></a></li>
+                    <li><a class="nav-link" href="{{route('ukk.index')}}"><i class="fas fa-tv"></i> <span>UKK</span></a></li>
+                  </ul>
+                </li>      
+          @elseif(Auth::user()->role == "Guru Senbud")
+                <li class="menu-header">Dashboard</li>
+                  <li class="nav-item dropdown">
+                      <a href="{{url('admin/instruktur/dashboard')}}" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>                
+                  </li> 
+                  <li class="menu-header">Menu</li>
+                  <li class="nav-item ">
+                      <a href="{{route('absen.index')}}" class="nav-link"><i class="fas fa-check-square"></i><span>Absen</span></a>                
+                  </li>               
+                  <li class="nav-item dropdown">
+                    <a href="" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-star"></i> <span>Nilai</span></a>
+                    <ul class="dropdown-menu">                  
+                      <li><a class="nav-link" href="{{route('daily.index')}}"><i class="fas fa-drum"></i> <span>Harian</span></a></li>
+                      <li><a class="nav-link" href="{{route('pts.index')}}"><i class="fas fa-basketball-ball"></i> <span>PTS</span></a></li>                  
+                      <li><a class="nav-link" href="{{route('pas.index')}}"><i class="fas fa-tv"></i> <span>PAS</span></a></li>
+                      <li><a class="nav-link" href="{{route('ukk.index')}}"><i class="fas fa-tv"></i> <span>UKK</span></a></li>
+                    </ul>
+                </li>                                 
           @endif
               
               

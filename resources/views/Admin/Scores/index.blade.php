@@ -15,9 +15,17 @@
                 <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <h4>Daftar Nilai {{$type}}</h4>
+                    <h4>Daftar Nilai {{$types}}</h4>
                     <div class="card-header-action">
+                    @if($types == "Harian")
                         <a class="btn btn-success" href="{{route('daily.create')}}">Add</a>  
+                    @elseif($types == "PTS")
+                        <a class="btn btn-success" href="{{route('pts.create')}}">Add</a>  
+                    @elseif($types == "PAS")
+                        <a class="btn btn-success" href="{{route('pas.create')}}">Add</a>  
+                    @elseif($types == "UKK")
+                        <a class="btn btn-success" href="{{route('ukk.create')}}">Add</a>  
+                    @endif 
                     </div>
             
                     </div>
@@ -33,15 +41,39 @@
                         @foreach($score as $a)    
                         <tr>
                             <td>{{ ++ $i }}</td>
-                            <td>Nilai Harian {{ $a -> scorename}}</td>
+                            <td>Nilai {{$types}} {{ $a -> scorename}}</td>
                             <td>{{ $a -> created_at}}</td>                   
                             <td>
-                                <form action="{{route('daily.destroy', $a->id)}}" method="post"> 
-                                    <a href="" class="btn btn-warning">View</a>                                                                       
-                                    @csrf
-                                    @method('DELETE')               
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                                @if($types == "Harian")
+                                    <form action="{{route('daily.destroy', $a->id)}}" method="post"> 
+                                        <a href="{{route('daily.show', $a->id)}}" class="btn btn-warning">View</a>                                                                       
+                                        @csrf
+                                        @method('DELETE')               
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @elseif($types == "PTS")
+                                    <form action="{{route('pts.destroy', $a->id)}}" method="post"> 
+                                        <a href="{{route('pts.show', $a->id)}}" class="btn btn-warning">View</a>                                                                       
+                                        @csrf
+                                        @method('DELETE')               
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @elseif($types == "PAS")
+                                    <form action="{{route('pas.destroy', $a->id)}}" method="post"> 
+                                        <a href="{{route('pas.show', $a->id)}}" class="btn btn-warning">View</a>                                                                       
+                                        @csrf
+                                        @method('DELETE')               
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @elseif($types == "UKK")
+                                    <form action="{{route('ukk.destroy', $a->id)}}" method="post"> 
+                                        <a href="{{route('ukk.show', $a->id)}}" class="btn btn-warning">View</a>                                                                       
+                                        @csrf
+                                        @method('DELETE')               
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                @endif 
+                                
                             </td>
                         </tr>
                         @endforeach                     

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\type;
 
-class DailyScoreController extends Controller
+class UKKScoreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class DailyScoreController extends Controller
      */
     public function index()
     {
-        $types = "Harian";
+        $types = "UKK";
         $user = Auth::user();
         $score = Scores::query()
         ->join('users','users.id','=','scores.user_id')
@@ -34,7 +34,7 @@ class DailyScoreController extends Controller
             'scores.id as id',
         )
         ->where([
-            ['scores.type','=','Harian'],
+            ['scores.type','=','UKK'],
             ['scores.user_id','=',$user->id],
         ])->latest()->paginate(15);
         
@@ -50,7 +50,7 @@ class DailyScoreController extends Controller
      */
     public function create()
     {
-        $type = "Harian";
+        $type = "UKK";
         return view('Admin.Scores.create',compact('type'));
     }
 
@@ -85,11 +85,11 @@ class DailyScoreController extends Controller
             'name' => $dataRequest['name'],
             'user_id' => $user->id,
             'ekskul_id' => $ekskul_id,
-            'type' => "Harian",
+            'type' => "UKK",
         ];                
         $score = Scores::create($data);
         
-        return redirect(route('daily.show', $score->id))
+        return redirect(route('ukk.show', $score->id))
             ->with('success', 'Success Added Data');
     }
 
@@ -102,7 +102,7 @@ class DailyScoreController extends Controller
     public function show($id)
     {
         
-        $types = "daily";
+        $types = "ukk";
         
         $user = Auth::user();
         $score = ScoreDetails::query()
@@ -117,6 +117,7 @@ class DailyScoreController extends Controller
             'rayon.name as rayon',
             'score_details.score as score',
             'score_details.id as id',
+            'score_details.user_id as userid',
             'score_details.created_at as created_at',                        
         )
         ->where('score_details.score_id','=', $id)->latest()->paginate(15);        
@@ -134,8 +135,8 @@ class DailyScoreController extends Controller
     public function edit($id)
     { 
         $score = ScoreDetails::find($id);                
-        $type = "Harian";
-        return view('Admin.Scores.daily',compact('type','score'));
+        $type = "UKK";
+        return view('Admin.Scores.ukk',compact('type','score'));
     }
 
     /**
@@ -156,7 +157,7 @@ class DailyScoreController extends Controller
         $score->score = $dataRequest['score'];
         $score->note = $dataRequest['note'];
         $score->save();
-        return redirect(route('daily.show', $scores))
+        return redirect(route('ukk.show', $scores))
             ->with('success','Success Update Data');
     }
 
@@ -170,7 +171,7 @@ class DailyScoreController extends Controller
     {
         $score = Scores::find($id);            
         $score->delete();
-        return redirect()->route('daily.index')
+        return redirect()->route('ukk.index')
             ->with('success','Success Delete Data');
     }
 }

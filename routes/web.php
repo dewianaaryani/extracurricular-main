@@ -20,6 +20,12 @@ use App\Http\Controllers\Admin\AbsenDetailsController as AdminAbsenDet;
 use App\Http\Controllers\Admin\AbsenSiswaController as AdminAbsenSiswa;
 use App\Http\Controllers\Admin\ScoresController as AdminScores;
 use App\Http\Controllers\Admin\DailyScoreController as AdminDailyScore;
+use App\Http\Controllers\Admin\PTSScoreController as AdminPTS;
+use App\Http\Controllers\Admin\PASScoreController as AdminPAS;
+use App\Http\Controllers\Admin\UKKScoreController as AdminUKK;
+use App\Http\Controllers\Admin\ScoreDetailsController as AdminDetailScore;
+
+
 use App\Http\Controllers\PageController;
 
 /*
@@ -66,6 +72,11 @@ Route::prefix('admin')->group(function () {
             Route::get('pjr/showUpdRayon', [AdminPJR::class, 'showUpdRayon'])->name('pjr.showUpdRayon');
             Route::get('pjr/showUpdProdRayon', [AdminPJR::class, 'showUpdProdRayon'])->name('pjr.showUpdProdRayon');
             Route::get('pjr/showSenbudRayon', [AdminPJR::class, 'showSenbudRayon'])->name('pjr.showSenbudRayon');
+            Route::get('pjr/nilaiUpdRayon', [AdminPJR::class, 'nilaiUpdRayon'])->name('pjr.nilaiUpdRayon');
+            Route::get('pjr/nilaiUpdProdRayon', [AdminPJR::class, 'nilaiUpdProdRayon'])->name('pjr.nilaiUpdProdRayon');
+            Route::get('pjr/nilaiSenbudRayon', [AdminPJR::class, 'nilaiSenbudRayon'])->name('pjr.nilaiSenbudRayon');
+            
+            
         });
         Route::group(['middleware' => ['cek_login:Koordinator Senbud & UPD']], function(){
             Route::resource('siswa', AdminSiswa::class);
@@ -93,6 +104,10 @@ Route::prefix('admin')->group(function () {
             
             Route::prefix('scores')->group(function () {
                 Route::resource('daily',AdminDailyScore::class );
+                Route::resource('pts',AdminPTS::class );
+                Route::resource('pas',AdminPAS::class );
+                Route::resource('ukk',AdminUKK::class );
+                Route::resource('detailScore',AdminDetailScore::class );
             });
         });        
         // Route::get('/', function () {
